@@ -1,6 +1,6 @@
 <?php
 namespace Aizxin\Controllers\Api;
-use Phalcon\Mvc\Controller;
+use Aizxin\Controllers\Controller;
 
 class IndexController extends Controller
 {

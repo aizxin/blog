@@ -48,3 +48,8 @@ www  WEB部署目录（或者子目录）
 * 利用phalcon脚本新建model时，使用phalcon model name --namespace=MyApp\Models
 * 利用phalcon脚本新建controller时，使用phalcon controller name --namespace=MyApp\Controllers\SubNamespace
 
+## 笔记 ##
+* // di('userRepo')->find(1);
+
+* // repository('user')->find(1);
+

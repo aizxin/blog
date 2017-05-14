@@ -10,7 +10,7 @@ use Phalcon\Flash\Direct as Flash;
 use Phalcon\Events\Manager as EventsManager;
 use Phalcon\Events\Event;
 use Phalcon\Mvc\Dispatcher;
-
+use Phalcon\Logger\Adapter\File as FileLogger;
 /**
  * Shared configuration service
  */
@@ -147,4 +147,14 @@ $di->set('dispatcher', function () {
     $dispatcher->setEventsManager($eventsManager);
 
     return $dispatcher;
+});
+
+/**
+ *  日志记录
+ */
+$di->setShared('logger', function(){
+    $config = $this->getConfig();
+    $day = date('Ymd');
+    $logger = new FileLogger($config->application->logDir."{$day}.log");
+    return $logger;
 });

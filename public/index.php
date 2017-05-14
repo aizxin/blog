@@ -26,16 +26,20 @@ try {
      * Read services
      */
     include BASE_PATH . '/config/services.php';
-
     /**
-     * Get config service for use in inline setup below
+     * Read repository
      */
-    $config = $di->getConfig();
+    include BASE_PATH . '/config/repository.php';
 
     /**
      * Include Autoloader
      */
     include BASE_PATH . '/config/loader.php';
+
+    /**
+     * Get config service for use in inline setup below
+     */
+    $config = $di->getConfig();
 
     /**
      * Handle the request

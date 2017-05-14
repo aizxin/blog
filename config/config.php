@@ -8,11 +8,11 @@ defined('APP_PATH') || define('APP_PATH', BASE_PATH . '/app');
 
 return new \Phalcon\Config([
     'database' => [
-        'adapter'     => 'Mysql',
-        'host'        => 'localhost',
-        'username'    => 'root',
-        'password'    => 'root',
-        'dbname'      => 'phalconcms',
+        'adapter'     => env('DB_CONNECTION','Mysql'),
+        'host'        => env('DB_HOST','localhost'),
+        'username'    => env('DB_USERNAME','root'),
+        'password'    => env('DB_PASSWORD','root'),
+        'dbname'      => env('DB_DATABASE','phalconrbac'),
         'charset'     => 'utf8',
     ],
     'application' => [
@@ -24,10 +24,14 @@ return new \Phalcon\Config([
         'pluginsDir'     => APP_PATH . '/plugins/',
         'libraryDir'     => APP_PATH . '/library/',
         'cacheDir'       => BASE_PATH . '/storage/cache/',
+        'logDir' => BASE_PATH . '/storage/log/',
 
         // This allows the baseUri to be understand project paths that are not in the root directory
         // of the webpspace.  This will break if the public/index.php entry point is moved or
         // possibly if the web server rewrite rules are changed. This can also be set to a static path.
         'baseUri'        => preg_replace('/public([\/\\\\])index.php$/', '', $_SERVER["PHP_SELF"]),
+
+        'repositoriesDir' => APP_PATH . '/repositories/',
+        'servicesDir'     => APP_PATH . '/services/',
     ]
 ]);
