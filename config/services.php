@@ -1,12 +1,6 @@
 <?php
 
-use Phalcon\Mvc\View;
 use Phalcon\Mvc\View\Engine\Php as PhpEngine;
-use Phalcon\Mvc\Url as UrlResolver;
-use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
-use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
-use Phalcon\Flash\Direct as Flash;
-use Phalcon\Events\Manager as EventsManager;
 use Phalcon\Events\Event;
 use Phalcon\Mvc\Dispatcher;
 /**
@@ -22,7 +16,7 @@ $di->setShared('config', function () {
 $di->setShared('url', function () {
     $config = $this->getConfig();
 
-    $url = new UrlResolver();
+    $url = new \Phalcon\Mvc\Url();
     $url->setBaseUri($config->application->baseUri);
 
     return $url;
@@ -34,7 +28,7 @@ $di->setShared('url', function () {
 $di->setShared('view', function () {
     $config = $this->getConfig();
 
-    $view = new View();
+    $view = new \Phalcon\Mvc\View();
     $view->setDI($this);
     $view->setViewsDir($config->application->viewsDir);
 
@@ -42,10 +36,11 @@ $di->setShared('view', function () {
         '.volt' => function ($view) {
             $config = $this->getConfig();
 
-            $volt = new VoltEngine($view, $this);
-
+            $volt = new \Phalcon\Mvc\View\Engine\Volt($view, $this);
+            $dir = $config->application->cacheDir.'/views/';
+            if (!is_dir($dir)) mkdir($dir, 0777, true);
             $volt->setOptions([
-                'compiledPath' => $config->application->cacheDir,
+                'compiledPath' => $dir,
                 'compiledSeparator' => '_'
             ]);
 
@@ -87,14 +82,14 @@ $di->setShared('db', function () {
  * If the configuration specify the use of metadata adapter use it or use memory otherwise
  */
 $di->setShared('modelsMetadata', function () {
-    return new MetaDataAdapter();
+    return new \Phalcon\Mvc\Model\Metadata\Memory();
 });
 
 /**
  * Register the session flash service with the Twitter Bootstrap classes
  */
 $di->set('flash', function () {
-    return new Flash([
+    return new \Phalcon\Flash\Direct([
         'error'   => 'alert alert-danger',
         'success' => 'alert alert-success',
         'notice'  => 'alert alert-info',
@@ -210,7 +205,7 @@ $di->set( 'cookies', function(){
  */
 $di->set('dispatcher', function () {
     // 创建一个事件管理器
-    $eventsManager = new EventsManager();
+    $eventsManager = new \Phalcon\Events\Manager();
 
     // 处理异常和使用 NotFoundPlugin 未找到异常
     $eventsManager->attach(
