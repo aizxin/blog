@@ -31,15 +31,15 @@ try {
      */
     include BASE_PATH . '/config/repository.php';
 
-    /**
-     * Include Autoloader
-     */
-    include BASE_PATH . '/config/loader.php';
 
     /**
      * Get config service for use in inline setup below
      */
     $config = $di->getConfig();
+    /**
+     * Include Autoloader
+     */
+    include BASE_PATH . '/config/loader.php';
 
     /**
      * Handle the request

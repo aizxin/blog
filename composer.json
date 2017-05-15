@@ -15,11 +15,20 @@
     "autoload": {
         "psr-4": {
             "Aizxin\\": "app/"
-        }
+        },
+        "files": [
+            "app/library/helper.php"
+        ]
     },
     "scripts": {
         "post-create-project-cmd": [
             "php -r \"copy('.env.example', '.env');\""
         ]
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.laravel-china.org"
+        }
     }
 }
