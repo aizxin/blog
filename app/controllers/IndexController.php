@@ -1,16 +1,14 @@
 <?php
 namespace Aizxin\Controllers;
 use Aizxin\Controllers\Controller;
-
+use Phalcon\Session\Adapter\Redis;
 class IndexController extends Controller
 {
     public function indexAction()
     {
-        // var_dump(repository('user')->find(1)->toArray());
-        // var_dump(di('userRepo')->find(1)->toArray());
-        // $this->session->add('dd',1111);
-        var_dump($this->session);
+         $this->cache->save('my-data', [1, 2, 3, 4, 5]);
 
+        var_dump($this->cache->get('my-data'));
         // di('logger')->info("This is an info message");
         // 取消  默认视图
         $this->view->disable();

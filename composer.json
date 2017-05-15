@@ -12,9 +12,6 @@
         "ext-phalcon": "^3.0",
         "michele-angioni/phalcon-repositories": "^0.2.0"
     },
-    "require-dev": {
-        "phalcon/incubator": "^3.0.4"
-    },
     "autoload": {
         "psr-4": {
             "Aizxin\\": "app/"

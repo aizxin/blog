@@ -7,23 +7,7 @@ defined('BASE_PATH') || define('BASE_PATH', getenv('BASE_PATH') ?: realpath(dirn
 defined('APP_PATH') || define('APP_PATH', BASE_PATH . '/app');
 
 return new \Phalcon\Config([
-    'database' => [
-        'adapter'     => env('DB_CONNECTION','Mysql'),
-        'host'        => env('DB_HOST','localhost'),
-        'username'    => env('DB_USERNAME','root'),
-        'password'    => env('DB_PASSWORD','root'),
-        'dbname'      => env('DB_DATABASE','phalconrbac'),
-        'charset'     => 'utf8',
-        'dbport'      => env('DB_PORT', '3306')
-    ],
-    'redis' => [
-        'host' => env('REDIS_HOST', '127.0.0.1'),
-        'port' => env('REDIS_PORT', '6379'),
-        'auth' => env('REDIS_AUTH', null),
-        'persistent' => env('REDIS_PERSISTENT', false),
-        'index' => env('REDIS_INDEX', 0),
-        'prefix' => env('REDIS_PREFIX', ''),
-    ],
+
     'application' => [
         'appDir'         => APP_PATH . '/',
         'controllersDir' => APP_PATH . '/controllers/',
@@ -42,6 +26,39 @@ return new \Phalcon\Config([
 
         'repositoriesDir' => APP_PATH . '/repositories/',
         'servicesDir'     => APP_PATH . '/services/',
+    ],
+    /**
+     *  databases
+     */
+    'database' => [
+        'adapter'     => env('DB_CONNECTION','Mysql'),
+        'host'        => env('DB_HOST','localhost'),
+        'username'    => env('DB_USERNAME','root'),
+        'password'    => env('DB_PASSWORD','root'),
+        'dbname'      => env('DB_DATABASE','phalconrbac'),
+        'charset'     => 'utf8',
+        'dbport'      => env('DB_PORT', '3306')
+    ],
+    'redis' => [
+        'host' => env('REDIS_HOST', '127.0.0.1'),
+        'port' => env('REDIS_PORT', '6379'),
+        'auth' => env('REDIS_AUTH', null),
+        'persistent' => env('REDIS_PERSISTENT', false),
+        'index' => env('REDIS_INDEX', 0),
+        'prefix' => env('REDIS_PREFIX', ''),
+    ],
+    'mongo' => [
+        'host' => env('MONGODB_HOST', '127.0.0.1'),
+        'port' => env('MONGODB_PORT', '27017'),
+        'connect' => env('MONGODB_CONNECT', true),
+        'timeout' => env('MONGODB_TIMEOUT', null),
+        'replicaSet' => env('MONGODB_REPLICA_SET', null),
+        'username' => env('MONGODB_USERNAME', null),
+        'password' => env('MONGODB_PASSWORD', null),
+        'db' => env('MONGODB_DB', null),
+        'collection' => env('MONGODB_COLLECTION', null),
+        // 是否开启Mongo辅助类
+        'utils' => env('MONGODB_UTILS', false),
     ],
     /*
     |--------------------------------------------------------------------------

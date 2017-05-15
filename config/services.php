@@ -9,7 +9,6 @@ use Phalcon\Flash\Direct as Flash;
 use Phalcon\Events\Manager as EventsManager;
 use Phalcon\Events\Event;
 use Phalcon\Mvc\Dispatcher;
-use Phalcon\Logger\Adapter\File as FileLogger;
 /**
  * Shared configuration service
  */
@@ -106,35 +105,96 @@ $di->set('flash', function () {
 /**
  * Start the session the first time some component request the session service
  */
-$di->set('session', function () {
+$di->setShared('session', function () {
     $config = $this->getConfig();
     $session = null;
     switch ($config->session->type) {
-        case 'file':
-            $session = new \Phalcon\Session\Adapter\Files();
-            $session->start();
-            break;
         case 'redis':
-            if( !extension_loaded( 'redis' ))
-            {
-                echo 'redis extension not loaded!<br>';
-                break;
-            }
-            $session = new \Phalcon\Session\Backend\Redis([
+            $session = new \Phalcon\Session\Adapter\Redis([
                 "uniqueId"   => $config->unique_id,
                 "host"       => $config->redis->host,
                 "port"       => $config->redis->port,
-                "auth"       => $config->redis->auth,
+                // "auth"       => $config->redis->auth,
                 "persistent" => $config->redis->persistent,
                 "lifetime"   => $config->session->lifetime,
                 "prefix"     => $config->redis->prefix,
                 "index"      => $config->redis->index
             ]);
-            $session->start();
+            break;
+        case 'file':
+        default:
+            $session = new \Phalcon\Session\Adapter\Files([
+                "uniqueId"   => $config->unique_id,
+            ]);
             break;
     }
-    ini_set( "session.cookie_httponly", 1 );
+    if($session != null){
+        $session->start();
+        ini_set( "session.cookie_httponly", 1 );
+    }
     return $session;
+});
+/**
+ * Start the session the first time some component request the session service
+ */
+$di->setShared('cache', function () {
+    $config = $this->getConfig();
+    $frontCache = new Phalcon\Cache\Frontend\Data(
+        [
+            "lifetime" => $config->cache->lifetime,
+        ]
+    );
+    $cache = null;
+    switch (strtolower($config->cache->type)) {
+        case 'memcached':
+            $cache = new \Phalcon\Cache\Backend\Libmemcached(
+                $frontCache,
+                [
+                    "host" => env('MEMCACHED_HOST', '127.0.0.1'),
+                    "port" => env('MEMCACHED_PORT', '11211'),
+                    "weight" => env('MEMCACHED_WEIGHT', 1),
+                    'statsKey' => '_PHCM',
+                ]
+            );
+            break;
+        case 'redis':
+            $cache = new \Phalcon\Cache\Backend\Redis(
+                $frontCache,
+                [
+                    'host' => $config->redis->host,
+                    'port' => $config->redis->port,
+                    // 'auth' => $config->redis->auth,
+                    'persistent' => $config->redis->persistent,
+                    'index' => $config->redis->index,
+                    'prefix' => $config->redis->prefix,
+                    'statsKey' => '_PHCM',
+                ]
+            );
+            break;
+        case 'mongo':
+            $server = sprintf("mongodb://%s:%d", $config->mongo->host, $config->mongo->port);
+            $cache = new \Phalcon\Cache\Backend\Mongo(
+                $frontCache,
+                [
+                    'server' => $server,
+                    'db' => $config->mongo->db,
+                    'collection' => $config->mongo->collection,
+                ]
+            );
+            break;
+        case 'file':
+        default:
+            $dir = $config->application->cacheDir . 'data/';
+            if (!is_dir($dir)) mkdir($dir, 0777, true);
+            $cache = new \Phalcon\Cache\Backend\File(
+                $frontCache,
+                [
+                    "cacheDir" => $dir,
+                ]
+            );
+            break;
+    }
+    return $cache;
 });
 /**
  * Start the cookies
@@ -167,7 +227,6 @@ $di->set('dispatcher', function () {
                             'action' => 'show404',
                         ]
                     );
-
                     return false;
             }
         }
@@ -189,6 +248,6 @@ $di->setShared('logger', function(){
     $day = date('Ymd');
     $dir = $config->application->logDir . $day;
     if (!is_dir($dir)) mkdir($dir, 0777, true);
-    $logger = new FileLogger($dir."/{$day}.log");
+    $logger = new \Phalcon\Logger\Adapter\File($dir."/{$day}.log");
     return $logger;
 });
