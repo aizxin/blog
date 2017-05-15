@@ -8,7 +8,10 @@ class IndexController extends Controller
     {
         // var_dump(repository('user')->find(1)->toArray());
         // var_dump(di('userRepo')->find(1)->toArray());
-        di('logger')->info("This is an info message");
+        // $this->session->add('dd',1111);
+        var_dump($this->session);
+
+        // di('logger')->info("This is an info message");
         // 取消  默认视图
         $this->view->disable();
         echo 'ddd';

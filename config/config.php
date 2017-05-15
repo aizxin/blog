@@ -14,6 +14,15 @@ return new \Phalcon\Config([
         'password'    => env('DB_PASSWORD','root'),
         'dbname'      => env('DB_DATABASE','phalconrbac'),
         'charset'     => 'utf8',
+        'dbport'      => env('DB_PORT', '3306')
+    ],
+    'redis' => [
+        'host' => env('REDIS_HOST', '127.0.0.1'),
+        'port' => env('REDIS_PORT', '6379'),
+        'auth' => env('REDIS_AUTH', null),
+        'persistent' => env('REDIS_PERSISTENT', false),
+        'index' => env('REDIS_INDEX', 0),
+        'prefix' => env('REDIS_PREFIX', ''),
     ],
     'application' => [
         'appDir'         => APP_PATH . '/',
@@ -33,5 +42,65 @@ return new \Phalcon\Config([
 
         'repositoriesDir' => APP_PATH . '/repositories/',
         'servicesDir'     => APP_PATH . '/services/',
-    ]
+    ],
+    /*
+    |--------------------------------------------------------------------------
+    | Unique_id Environment
+    |--------------------------------------------------------------------------
+    |
+    | This value is your-private-app for this project.
+    |
+    */
+    'unique_id' => env('UNIQUE_ID', 'phalcon'),
+    /*
+    |--------------------------------------------------------------------------
+    | Cache Environment
+    |--------------------------------------------------------------------------
+    |
+    | The default setting is file.
+    | If you want to use redis ,you must set type=redis,
+    |
+    */
+    'cache' => [
+        'type' => env('CACHE_DRIVER', 'file'),
+        'lifetime' => 172800,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | SESSION Environment
+    |--------------------------------------------------------------------------
+    |
+    | The default setting is file.
+    | If you want to use redis ,you must set type=redis,
+    |
+    */
+    'session' => [
+        'type' => env('SESSION_DRIVER', 'file'),
+        'lifetime' => 172800,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | COOKIES Environment
+    |--------------------------------------------------------------------------
+    |
+    | isCrypt::是否加密 默认值false.
+    |
+    */
+    'cookies' => [
+        'isCrypt' => env('COOKIE_ISCRYPT', false)
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | CRYPT Environment
+    |--------------------------------------------------------------------------
+    |
+    | key::The secret key.
+    |
+    */
+    'crypt' => [
+        'key' => env('CRYPT_KEY', 'phalcon-project-cookie->key')
+    ],
 ]);

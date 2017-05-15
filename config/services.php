@@ -5,7 +5,6 @@ use Phalcon\Mvc\View\Engine\Php as PhpEngine;
 use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
-use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Phalcon\Flash\Direct as Flash;
 use Phalcon\Events\Manager as EventsManager;
 use Phalcon\Events\Event;
@@ -107,12 +106,45 @@ $di->set('flash', function () {
 /**
  * Start the session the first time some component request the session service
  */
-$di->setShared('session', function () {
-    $session = new SessionAdapter();
-    $session->start();
-
+$di->set('session', function () {
+    $config = $this->getConfig();
+    $session = null;
+    switch ($config->session->type) {
+        case 'file':
+            $session = new \Phalcon\Session\Adapter\Files();
+            $session->start();
+            break;
+        case 'redis':
+            if( !extension_loaded( 'redis' ))
+            {
+                echo 'redis extension not loaded!<br>';
+                break;
+            }
+            $session = new \Phalcon\Session\Backend\Redis([
+                "uniqueId"   => $config->unique_id,
+                "host"       => $config->redis->host,
+                "port"       => $config->redis->port,
+                "auth"       => $config->redis->auth,
+                "persistent" => $config->redis->persistent,
+                "lifetime"   => $config->session->lifetime,
+                "prefix"     => $config->redis->prefix,
+                "index"      => $config->redis->index
+            ]);
+            $session->start();
+            break;
+    }
+    ini_set( "session.cookie_httponly", 1 );
     return $session;
 });
+/**
+ * Start the cookies
+ */
+$di->set( 'cookies', function(){
+    $cookies = new \Phalcon\Http\Response\Cookies();
+    $cookies->useEncryption( false );
+    ini_set("session.cookie_httponly", 1);
+    return $cookies;
+ });
 /**
  *  // dispatcher
  */
@@ -155,6 +187,8 @@ $di->set('dispatcher', function () {
 $di->setShared('logger', function(){
     $config = $this->getConfig();
     $day = date('Ymd');
-    $logger = new FileLogger($config->application->logDir."{$day}.log");
+    $dir = $config->application->logDir . $day;
+    if (!is_dir($dir)) mkdir($dir, 0777, true);
+    $logger = new FileLogger($dir."/{$day}.log");
     return $logger;
 });
