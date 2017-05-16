@@ -1,6 +1,6 @@
 <?php
-namespace Aizxin\Controllers\Api;
-use Aizxin\Controllers\Controller;
+namespace Sow\Controllers\Api;
+use Sow\Controllers\Controller;
 
 class IndexController extends Controller
 {

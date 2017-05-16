@@ -5,18 +5,16 @@ $loader = new \Phalcon\Loader();
 /**
  * We're a registering a set of directories taken from the configuration file
  */
-$loader->registerDirs(
+$loader->registerNamespaces([
+    'Sow' => BASE_PATH,
+    'Sow\Controllers' => $config->application->controllersDir,
+    'Sow\Models' => $config->application->modelsDir,
+    'Sow\Controllers\Api' => $config->application->controllersDir  . '/api/',
+    'Sow\Validators' => $config->application->validatorsDir,
+    'Sow\Repositories' => $config->application->repositoriesDir,
+    'Sow\Services' => $config->application->servicesDir,
+])->registerFiles(
     [
-        $config->application->controllersDir,
-        $config->application->modelsDir
+        'function' => $config->application->libraryDir . 'helper.php',
     ]
 )->register();
-// $loader->registerNamespaces([
-//     'Aizxin' => BASE_PATH,
-//     'Aizxin\Controllers' => $config->application->controllersDir,
-//     'Aizxin\Models' => $config->application->modelsDir,
-//     'Aizxin\Controllers\Api' => $config->application->controllersDir  . '/api/',
-//     'Aizxin\Validators' => $config->application->validatorsDir,
-//     'Aizxin\Repositories' => $config->application->repositoriesDir,
-//     'Aizxin\Services' => $config->application->servicesDir,
-// ])->register();

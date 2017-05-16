@@ -45,11 +45,11 @@ www  WEB部署目录（或者子目录）
 
 
 ## 注意事项 ##
-* 利用phalcon脚本新建model时，使用phalcon model name --namespace=MyApp\Models
-* 利用phalcon脚本新建controller时，使用phalcon controller name --namespace=MyApp\Controllers\SubNamespace
+* 利用phalcon脚本新建model时，使用phalcon model name --namespace=App\Models --extends=Model --force
+* 【BUG】如果你model里用use加载了其他类库，当你使用官方phalcon工具脚本建立model的时候，会被删除掉。这里可以使用我修改的[devtools](https://github.com/limingxinleo/phalcon-devtools.git)
+* 利用phalcon脚本新建controller时，使用phalcon controller name --namespace=App\Controllers\SubNamespace
 
 ## 笔记 ##
 * // di('userRepo')->find(1);
-
 * // repository('user')->find(1);
 

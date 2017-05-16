@@ -1,8 +1,8 @@
 <?php
-namespace Aizxin\Repositories;
+namespace Sow\Repositories;
 
 use MicheleAngioni\PhalconRepositories\AbstractRepository;
-use Aizxin\Models\Users;
+use Sow\Models\User;
 
 class UserRepository extends AbstractRepository
 {
@@ -10,6 +10,6 @@ class UserRepository extends AbstractRepository
 
     public function __construct()
     {
-        $this->model = new Users();
+        $this->model = new User();
     }
 }

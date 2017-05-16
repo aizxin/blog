@@ -4,7 +4,7 @@
  * 业务仓库工厂
  */
 
-namespace Aizxin\Repositories;
+namespace Sow\Repositories;
 
 class RepositoryFactory{
 

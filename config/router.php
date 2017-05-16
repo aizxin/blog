@@ -6,26 +6,26 @@ $router = $di->getRouter();
 $router->removeExtraSlashes( true );
 
 $router->add('/:controller/:action/:params', [
-    'namespace' => 'Aizxin\Controllers',
+    'namespace' => 'Sow\Controllers',
     'controller' => 1,
     'action' => 2,
     'params' => 3,
 ]);
 
 $router->add('/:controller', [
-    'namespace' => 'Aizxin\Controllers',
+    'namespace' => 'Sow\Controllers',
     'controller' => 1
 ]);
 
 $router->add('/api/:controller/:action/:params', [
-    'namespace' => 'Aizxin\Controllers\Api',
+    'namespace' => 'Sow\Controllers\Api',
     'controller' => 1,
     'action' => 2,
     'params' => 3,
 ]);
 
 $router->add('/api/:controller', [
-    'namespace' => 'Aizxin\Controllers\Api',
+    'namespace' => 'Sow\Controllers\Api',
     'controller' => 1
 ]);
 

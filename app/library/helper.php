@@ -35,7 +35,7 @@ if (!function_exists('di')) {
  */
 if (! function_exists('repository')) {
     function repository($repositoryName){
-        return (new \Aizxin\Repositories\RepositoryFactory())::repository($repositoryName);
+        return (new \Sow\Repositories\RepositoryFactory())::repository($repositoryName);
     }
 }
 

@@ -13,7 +13,7 @@ return new \Phalcon\Config([
         'controllersDir' => APP_PATH . '/controllers/',
         'modelsDir'      => APP_PATH . '/models/',
         'migrationsDir'  => APP_PATH . '/migrations/',
-        'viewsDir'       => BASE_PATH . '/resources/',
+        'viewsDir'       => BASE_PATH . '/resources/views/',
         'pluginsDir'     => APP_PATH . '/plugins/',
         'libraryDir'     => APP_PATH . '/library/',
         'cacheDir'       => BASE_PATH . '/storage/cache/',
@@ -34,10 +34,10 @@ return new \Phalcon\Config([
      */
     'database' => [
         'adapter'     => env('DB_CONNECTION','Mysql'),
-        'host'        => env('DB_HOST','localhost'),
-        'username'    => env('DB_USERNAME','root'),
-        'password'    => env('DB_PASSWORD','root'),
-        'dbname'      => env('DB_DATABASE','phalconrbac'),
+        'host'        => env('DB_HOST','127.0.0.1'),
+        'username'    => env('DB_USERNAME','secret'),
+        'password'    => env('DB_PASSWORD','secret'),
+        'dbname'      => env('DB_DATABASE','secret'),
         'charset'     => 'utf8',
         'dbport'      => env('DB_PORT', '3306')
     ],

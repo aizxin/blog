@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Aizxin\\": "app/"
+            "Sow\\": "app/"
         },
         "files": [
             "app/library/helper.php"

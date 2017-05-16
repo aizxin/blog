@@ -217,7 +217,7 @@ $di->set('dispatcher', function () {
                 case Dispatcher::EXCEPTION_ACTION_NOT_FOUND:
                     $dispatcher->forward(
                         [
-                            'namespace' => 'Aizxin\Controllers',
+                            'namespace' => 'Sow\Controllers',
                             'controller' => 'error',
                             'action' => 'show404',
                         ]
@@ -228,7 +228,7 @@ $di->set('dispatcher', function () {
     );
 
     $dispatcher = new Dispatcher();
-    $dispatcher->setDefaultNamespace('Aizxin\Controllers');
+    $dispatcher->setDefaultNamespace('Sow\Controllers');
     // 分配事件管理器到分发器
     $dispatcher->setEventsManager($eventsManager);
 

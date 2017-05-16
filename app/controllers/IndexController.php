@@ -1,13 +1,12 @@
 <?php
-namespace Aizxin\Controllers;
-use Aizxin\Controllers\Controller;
+namespace Sow\Controllers;
+use Sow\Controllers\Controller;
 
 class IndexController extends Controller
 {
     public function indexAction()
     {
-        var_dump(di('userRepo')->find(1)->toArray());
-        $this->view->disable();
+        // $this->view->disable();
     }
 
 }

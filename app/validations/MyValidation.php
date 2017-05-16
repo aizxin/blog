@@ -1,5 +1,5 @@
 <?php
-namespace Aizxin\Validations;
+namespace Sow\Validations;
 
 use Phalcon\Validation;
 use Phalcon\Validation\Validator\Email;
