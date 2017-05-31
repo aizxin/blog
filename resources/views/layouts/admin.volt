@@ -24,7 +24,7 @@
     </div>
     <!-- footer -->
     <div class="layui-footer my-footer">
-        <p><a href="http://vip-admin.com" target="_blank">vip-admin后台模板v1.6.0</a>&nbsp;&nbsp;&&nbsp;&nbsp;<a href="http://vip-admin.com/index/gather/index.html" target="_blank">vip-admin管理系统v1.1.0</a></p>
+        <p><a href="http://vip-admin.com" target="_blank">后台模板</a>&nbsp;&nbsp;&&nbsp;&nbsp;<a href="http://vip-admin.com/index/gather/index.html" target="_blank">管理系统</a></p>
         <p>2017 © copyright 蜀ICP备17005881号</p>
     </div>
 </div>
