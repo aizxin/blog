@@ -45,7 +45,7 @@ try {
      * Handle the request
      */
     $application = new \Phalcon\Mvc\Application($di);
-
+    // $application->useImplicitView(false);
     echo $application->handle()->getContent();
 
 } catch (\Exception $e) {

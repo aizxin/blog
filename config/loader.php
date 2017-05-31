@@ -10,6 +10,7 @@ $loader->registerNamespaces([
     'Sow\Controllers' => $config->application->controllersDir,
     'Sow\Models' => $config->application->modelsDir,
     'Sow\Controllers\Api' => $config->application->controllersDir  . '/api/',
+    'Sow\Controllers\Admin' => $config->application->controllersDir  . '/admin/',
     'Sow\Validators' => $config->application->validatorsDir,
     'Sow\Repositories' => $config->application->repositoriesDir,
     'Sow\Services' => $config->application->servicesDir,
