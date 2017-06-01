@@ -5,7 +5,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>后台管理</title>
+    <title>{{ lang._('backend') }}</title>
     <link href="{{ static_url('/admin/plugin/layui/css/layui.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ static_url('/admin/css/style.css') }}">
     <link rel="icon" href="{{ static_url('/admin/image/code.png') }}">

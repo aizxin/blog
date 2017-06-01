@@ -1,6 +1,5 @@
 <?php
 
-use Phalcon\Mvc\View\Engine\Php as PhpEngine;
 use Phalcon\Events\Event;
 use Phalcon\Mvc\Dispatcher;
 /**
@@ -35,7 +34,6 @@ $di->setShared('view', function () {
     $view->registerEngines([
         '.volt' => function ($view) {
             $config = $this->getConfig();
-
             $volt = new \Phalcon\Mvc\View\Engine\Volt($view, $this);
             $dir = $config->application->cacheDir.'/views/';
             if (!is_dir($dir)) mkdir($dir, 0777, true);
@@ -43,10 +41,9 @@ $di->setShared('view', function () {
                 'compiledPath' => $dir,
                 'compiledSeparator' => '_'
             ]);
-
             return $volt;
         },
-        '.phtml' => PhpEngine::class
+        '.phtml' => \Phalcon\Mvc\View\Engine\Php::class
 
     ]);
 
@@ -64,7 +61,8 @@ $di->setShared('db', function () {
         'username' => $config->database->username,
         'password' => $config->database->password,
         'dbname'   => $config->database->dbname,
-        'charset'  => $config->database->charset
+        'charset'  => $config->database->charset,
+        'persistent'=> true
     ];
 
     if ($config->database->adapter == 'Postgresql') {
@@ -244,4 +242,11 @@ $di->setShared('logger', function(){
     if (!is_dir($dir)) mkdir($dir, 0777, true);
     $logger = new \Phalcon\Logger\Adapter\File($dir."/{$day}.log");
     return $logger;
+});
+
+// 语言文件
+$di->set('lang', function () {
+    $config = $this->getConfig();
+    $language = include BASE_PATH . '/resources/lang/' . $config->locale . '.php';
+    return new \Phalcon\Translate\Adapter\NativeArray(['content' => $language]);
 });
