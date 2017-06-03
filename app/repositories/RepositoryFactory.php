@@ -20,7 +20,7 @@ class RepositoryFactory{
      * @return object
      * @throws \Exception
      */
-    public static function repository($repositoryName){
+    public static function getModel($repositoryName){
         $repositoryName = __NAMESPACE__ . "\\" . ucfirst($repositoryName.'Repository');
         if(!class_exists($repositoryName)){
             throw new \Exception("{$repositoryName}类不存在");

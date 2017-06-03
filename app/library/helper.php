@@ -35,9 +35,22 @@ if (!function_exists('di')) {
  */
 if (! function_exists('repository')) {
     function repository($repositoryName){
-        return (new \Sow\Repositories\RepositoryFactory())::repository($repositoryName);
+        return (new \Sow\Repositories\RepositoryFactory())::getModel($repositoryName);
     }
 }
+/**
+ *  [validate 验证仓库工厂]
+ *  @author Sow
+ *  @DateTime 2017-05-14T14:17:08+0800
+ *  @param    [type]                   $validationName [description]
+ *  @return   [type]                                   [description]
+ */
+if (! function_exists('validate')) {
+    function validate($validationName){
+        return (new \Sow\Validations\ValidationFactory())::getValidator($validationName);
+    }
+}
+
 
 /**
 * 获取.env文件下的变量值
@@ -59,5 +72,49 @@ if (! function_exists('env')) {
         } else {
             return $default;
         }
+    }
+}
+
+/**
+ *  [apiSuccess api成功返回]
+ *  @author Sow
+ *  @DateTime 2017-06-03T00:19:56+0800
+ */
+if (!function_exists('apiSuccess')) {
+    function apiSuccess($data = [])
+    {
+        $result = [
+            'code' => 200,
+            'result' => $data
+        ];
+        return di('response')->setJsonContent($result);
+    }
+}
+
+/**
+ *  [apiError api错误返回]
+ *  @author Sow
+ *  @DateTime 2017-06-03T00:21:16+0800
+ */
+if (!function_exists('apiError')) {
+    function apiError($msg = '')
+    {
+        $result = [
+            'code' => 400,
+            'message' => $msg
+        ];
+        return di('response')->setJsonContent($result);
+    }
+}
+
+/**
+ *  [setPassword 加密]
+ *  @author Sow
+ *  @DateTime 2017-06-03T14:48:58+0800
+ *  @param    [type]                   $password [description]
+ */
+if ( !function_exists('setPassword')) {
+    function setPassword($password){
+        return sha1(md5( $password . env('UNIQUE_ID') ));
     }
 }

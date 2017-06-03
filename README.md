@@ -1,6 +1,6 @@
 # phalcon3.0
 
-## 安装方法 ##
+## 安装phalcon方法 ##
 ~~~
 git clone --depth=1 git://github.com/phalcon/cphalcon.git
 cd cphalcon/build
@@ -10,6 +10,20 @@ vim etc/php.ini
 extension=phalcon.so
 
 ~~~
+## 安装方法
+~~~
+git clone https://github.com/aizxin/blog.git XXX
+cd XXX
+cp .env.example .env
+~~~
+* 修改.env中的 DB配置
+* 修改 app/config/config.ini 中的DB配置
+* 安装phalcon脚本工具
+* 执行以下代码
+~~~
+phalcon migration generate/run
+~~~
+
 
 ## 目录结构
 
@@ -50,6 +64,4 @@ www  WEB部署目录（或者子目录）
 * 利用phalcon脚本新建controller时，使用phalcon controller name --namespace=App\Controllers\SubNamespace
 
 ## 笔记 ##
-* // di('userRepo')->find(1);
-* // repository('user')->find(1);
 

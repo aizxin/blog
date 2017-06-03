@@ -12,4 +12,15 @@ class UserRepository extends AbstractRepository
     {
         $this->model = new User();
     }
+    /**
+     *  [postLogin 管理员登录]
+     *  @author Sow
+     *  @DateTime 2017-06-03T00:02:46+0800
+     *  @param    [type]                   $request [description]
+     *  @return   [type]                            [description]
+     */
+    public function postLogin($request)
+    {
+
+    }
 }

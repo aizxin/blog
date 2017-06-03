@@ -1,19 +1,22 @@
 <?php
 namespace Sow\Controllers\Admin;
+
 use Sow\Controllers\Controller;
-use Sow\Validators\AuthValidator;
-use Phalcon\Validation;
-use Phalcon\Validation\Validator\StringLength;
-use Phalcon\Validation\Validator\PresenceOf;
+use Sow\Validations\AuthValidation;
+
 class AuthController extends Controller
 {
     public function indexAction()
     {
         if ($this->request->isPost()) {
-            $validation = new AuthValidator();
-            $messages = $validation->validate($this->request->getPost());
-            if (count($messages)) {
-                return $this->response->setJsonContent($messages[0]->getMessage());
+            $request = $this->request->getJsonRawBody(['name','password']);
+            try {
+                validate('auth')->validator($request);
+                $request['password'] = setPassword($request['password']);
+                $user = $this->repo->getModel('user')->create($request);
+                return apiSuccess($user);
+            } catch (\Phalcon\Validation\Exception $ex) {
+                return apiError($ex->getMessage());
             }
         }
         $this->view->pick('admin/auth/login');

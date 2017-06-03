@@ -105,5 +105,8 @@ return $lang = [
     'lottery.total'           => '总',
 
     /* 验证 */
-    'validator.user.PresenceOf' => '账号不为空',
+    'validator.user.PresenceOf'      => '账号不能为空',
+    'validator.password.PresenceOf'  => '密码不能为空',
+    'validator.password.max'         => '密码不能多12字符',
+    'validator.password.min'         => '密码不能少6字符',
 ];

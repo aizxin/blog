@@ -250,3 +250,11 @@ $di->set('lang', function () {
     $language = include BASE_PATH . '/resources/lang/' . $config->locale . '.php';
     return new \Phalcon\Translate\Adapter\NativeArray(['content' => $language]);
 });
+// 注册业务仓库
+$di->set('repo', function (){
+    return new \Sow\Repositories\RepositoryFactory();
+});
+// 注册验证规则
+$di->set('validate',function(){
+    return new \Sow\Validations\ValidationFactory();
+});

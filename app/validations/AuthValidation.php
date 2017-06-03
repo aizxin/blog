@@ -1,11 +1,12 @@
 <?php
-namespace Sow\Validators;
+namespace Sow\Validations;
 
-use Phalcon\Validation;
+use Sow\Validations\SowValidation;
+
 use Phalcon\Validation\Validator\StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
 
-class AuthValidator extends Validation
+class AuthValidation extends SowValidation
 {
     public function initialize()
     {
@@ -13,7 +14,7 @@ class AuthValidator extends Validation
             "name",
             new PresenceOf(
                 [
-                    "message" => $this->lang->_('validator.user.PresenceOf'),
+                    "message" => $this->lang->_('validator.user.PresenceOf')
                 ]
             )
         );
@@ -21,7 +22,7 @@ class AuthValidator extends Validation
             "password",
             new PresenceOf(
                 [
-                    "message" => "The name is required",
+                    "message" => $this->lang->_('validator.password.PresenceOf')
                 ]
             )
         );
@@ -31,8 +32,8 @@ class AuthValidator extends Validation
                 [
                     "max"            => 12,
                     "min"            => 6,
-                    "messageMaximum" => "We don't like really long names",
-                    "messageMinimum" => "We want more than just their initials",
+                    "messageMaximum" => $this->lang->_('validator.password.max'),
+                    "messageMinimum" => $this->lang->_('validator.password.min')
                 ]
             )
         );

@@ -2,38 +2,74 @@
 
 namespace Sow\Models;
 
+use Sow\Traits\InitTimestamp;
 class User extends Model
 {
-
+    use InitTimestamp;
     /**
      *
      * @var integer
      * @Primary
      * @Identity
-     * @Column(type="integer", length=11, nullable=false)
+     * @Column(type="integer", length=10, nullable=false)
      */
     public $id;
 
     /**
      *
      * @var string
-     * @Column(type="string", length=45, nullable=false)
+     * @Column(type="string", length=255, nullable=false)
+     */
+    public $username;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", length=255, nullable=false)
      */
     public $name;
 
     /**
      *
      * @var string
-     * @Column(type="string", length=45, nullable=false)
+     * @Column(type="string", length=255, nullable=false)
+     */
+    public $email;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", length=255, nullable=false)
      */
     public $password;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", length=100, nullable=true)
+     */
+    public $remember_token;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", nullable=false)
+     */
+    public $created_at;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", nullable=false)
+     */
+    public $updated_at;
 
     /**
      * Initialize method for model.
      */
     public function initialize()
     {
-        $this->setSchema("phalconrbac");
+        $this->setSchema("phalblog");
     }
 
     /**
@@ -43,14 +79,14 @@ class User extends Model
      */
     public function getSource()
     {
-        return 'user';
+        return 'users';
     }
 
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return User[]|User
+     * @return Users[]|Users
      */
     public static function find($parameters = null)
     {
@@ -61,7 +97,7 @@ class User extends Model
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return User
+     * @return Users
      */
     public static function findFirst($parameters = null)
     {

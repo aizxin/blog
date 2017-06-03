@@ -11,9 +11,10 @@ $loader->registerNamespaces([
     'Sow\Models' => $config->application->modelsDir,
     'Sow\Controllers\Api' => $config->application->controllersDir  . '/api/',
     'Sow\Controllers\Admin' => $config->application->controllersDir  . '/admin/',
-    'Sow\Validators' => $config->application->validatorsDir,
+    'Sow\Validations' => $config->application->validationsDir,
     'Sow\Repositories' => $config->application->repositoriesDir,
     'Sow\Services' => $config->application->servicesDir,
+    'Sow\Traits'   => $config->application->traitsDir,
 ])->registerFiles(
     [
         'function' => $config->application->libraryDir . 'helper.php',

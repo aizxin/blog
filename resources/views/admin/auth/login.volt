@@ -39,9 +39,15 @@
         });
         // 提交监听
         form.on('submit(login)', function (data) {
-            $.post('/admin/auth', data.field, function (response) {
+            axios.post('/admin/auth', data.field)
+            .then(function(response) {
                 console.log(response)
-            }, "json");
+            }).catch(function(error) {
+                console.log(error);
+            });
+            // $.post('/admin/auth', data.field, function (response) {
+            //     console.log(response)
+            // }, "json");
             // layer.alert(JSON.stringify(data.field), {
             //     title: '最终的提交信息'
             // });

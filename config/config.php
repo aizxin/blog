@@ -51,7 +51,8 @@ return new \Phalcon\Config([
 
         'repositoriesDir' => APP_PATH . '/repositories/',
         'servicesDir'     => APP_PATH . '/services/',
-        'validatorsDir'   => APP_PATH . '/validators/',
+        'validationsDir'   => APP_PATH . '/validations/',
+        'traitsDir'       => APP_PATH . '/traits/',
 
     ],
     /**
