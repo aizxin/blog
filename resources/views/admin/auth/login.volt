@@ -17,42 +17,18 @@
             <input type="hidden" name="<?php echo $this->security->getTokenKey() ?>"
         value="<?php echo $this->security->getToken() ?>"/>
             <div class="layui-input-inline">
-                <input type="text" name="name" placeholder="{{ lang._('user.name') }}" autocomplete="off" class="layui-input">
+                <input type="text" name="name" lay-verify="required" placeholder="{{ lang._('user.name') }}" autocomplete="off" class="layui-input">
             </div>
             <div class="layui-input-inline">
-                <input type="password" name="password" placeholder="{{ lang._('user.password') }}" autocomplete="off" class="layui-input">
+                <input type="password" lay-verify="required|password" name="password" placeholder="{{ lang._('user.password') }}" autocomplete="off" class="layui-input">
             </div>
             <div class="layui-input-inline login-btn">
-                <button type="button" class="layui-btn" lay-submit="" lay-filter="login">{{ lang._('handle.login') }}</button>
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="login">{{ lang._('handle.login') }}</button>
             </div>
         </form>
     </div>
 </body>
 <script type="text/javascript" src="{{ static_url('/admin/plugin/layui/layui.js') }}"></script>
 <script type="text/javascript" src="{{ static_url('/admin/plugin/axios/axios.min.js') }}"></script>
-<script type="text/javascript">
-    layui.use(['form', 'layer'], function () {
-        var $ = layui.jquery,form = layui.form(),layer = layui.layer;
-        // 验证
-        form.verify({
-            password: [/(.+){6,12}$/, '密码必须6到12位']
-        });
-        // 提交监听
-        form.on('submit(login)', function (data) {
-            axios.post('/admin/auth', data.field)
-            .then(function(response) {
-                console.log(response)
-            }).catch(function(error) {
-                console.log(error);
-            });
-            // $.post('/admin/auth', data.field, function (response) {
-            //     console.log(response)
-            // }, "json");
-            // layer.alert(JSON.stringify(data.field), {
-            //     title: '最终的提交信息'
-            // });
-            return false;
-        })
-    });
-</script>
+<script type="text/javascript" src="{{ static_url('/admin/js/static/login.js')}}"></script>
 </html>

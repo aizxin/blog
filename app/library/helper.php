@@ -81,11 +81,12 @@ if (! function_exists('env')) {
  *  @DateTime 2017-06-03T00:19:56+0800
  */
 if (!function_exists('apiSuccess')) {
-    function apiSuccess($data = [])
+    function apiSuccess($data = [],$msg = '')
     {
         $result = [
             'code' => 200,
-            'result' => $data
+            'result' => $data,
+            'message' => $msg
         ];
         return di('response')->setJsonContent($result);
     }

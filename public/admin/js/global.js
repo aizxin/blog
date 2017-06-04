@@ -1,3 +1,8 @@
+layui.config({
+    base: '/admin/js/modules/',
+}).extend({
+    sow: 'sow'
+});
 layui.use(['layer', 'element', 'util'], function() {
     var element = layui.element(),
         layer = layui.layer,
@@ -169,17 +174,6 @@ layui.use(['layer', 'element', 'util'], function() {
         $(document).find(".layui-tab[lay-filter='card'] div.layui-tab-content").height(height - 2);
     };
     $(function() {
-        // 打赏
-        $('.pay').on('click', function() {
-            layer.open({
-                type: 1,
-                title: false, // 标题不显示
-                closeBtn: false, // 关闭按钮不显示
-                shadeClose: true, // 点击遮罩关闭
-                area: ['auto', 'auto'], // 宽高
-                content: $('.my-pay-box') // 弹出内容
-            });
-        });
         // 表格选中
         $('#dateTable tbody').on('click', 'tr input[type="checkbox"]', function() {
             var obj = $(this).parent().parent();

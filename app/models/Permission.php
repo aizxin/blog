@@ -2,13 +2,13 @@
 
 namespace Sow\Models;
 
+use Sow\Roles\Models\Permissions as Model;
+use Sow\Traits\InitTimestamp;
 
-use Sow\Roles\Contracts\AuthorizationInterface;
-use Sow\Roles\Traits\HasRolesAndPermissions;
-
-class User extends Model implements AuthorizationInterface
+class Permission extends Model
 {
-    use HasRolesAndPermissions;
+
+    use InitTimestamp;
     /**
      *
      * @var integer
@@ -20,10 +20,17 @@ class User extends Model implements AuthorizationInterface
 
     /**
      *
-     * @var string
-     * @Column(type="string", length=255, nullable=false)
+     * @var integer
+     * @Column(type="integer", length=10, nullable=false)
      */
-    public $username;
+    public $parent_id;
+
+    /**
+     *
+     * @var integer
+     * @Column(type="integer", length=1, nullable=false)
+     */
+    public $ismenu;
 
     /**
      *
@@ -37,33 +44,47 @@ class User extends Model implements AuthorizationInterface
      * @var string
      * @Column(type="string", length=255, nullable=false)
      */
-    public $email;
+    public $slug;
 
     /**
      *
      * @var string
-     * @Column(type="string", length=255, nullable=false)
+     * @Column(type="string", length=255, nullable=true)
      */
-    public $password;
+    public $description;
 
     /**
      *
      * @var string
-     * @Column(type="string", length=100, nullable=true)
+     * @Column(type="string", length=255, nullable=true)
      */
-    public $remember_token;
+    public $icon;
+
+    /**
+     *
+     * @var integer
+     * @Column(type="integer", length=255, nullable=false)
+     */
+    public $issort;
 
     /**
      *
      * @var string
-     * @Column(type="string", nullable=false)
+     * @Column(type="string", length=255, nullable=true)
+     */
+    public $model;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", nullable=true)
      */
     public $created_at;
 
     /**
      *
      * @var string
-     * @Column(type="string", nullable=false)
+     * @Column(type="string", nullable=true)
      */
     public $updated_at;
 
@@ -73,7 +94,6 @@ class User extends Model implements AuthorizationInterface
     public function initialize()
     {
         $this->setSchema("phalblog");
-        $this->hasRolesAndPermissions();
     }
 
     /**
@@ -83,14 +103,14 @@ class User extends Model implements AuthorizationInterface
      */
     public function getSource()
     {
-        return 'users';
+        return 'permissions';
     }
 
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Users[]|Users
+     * @return Permissions[]|Permissions
      */
     public static function find($parameters = null)
     {
@@ -101,7 +121,7 @@ class User extends Model implements AuthorizationInterface
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Users
+     * @return Permissions
      */
     public static function findFirst($parameters = null)
     {

@@ -91,6 +91,8 @@ return $lang = [
     /* use */
     'user.name' => '账号',
     'user.password' => '密码',
+    'user.login.error' => '账号或密码错误',
+    'user.login.success' => '登录成功',
 
 
     /* lottery */

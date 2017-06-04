@@ -21,6 +21,18 @@ class UserRepository extends AbstractRepository
      */
     public function postLogin($request)
     {
-
+        $data['name'] = $request->name;
+        try {
+            $userInfo = $this->firstBy($data);
+            if($userInfo->password != setPassword($request->password)){
+                throw new \Phalcon\Exception(di('lang')->_('use.login.error'));
+                return false;
+            }
+            di('session')->set('userInfo',$userInfo);
+            return $userInfo;
+        } catch (\Phalcon\Exception $e) {
+            throw new \Phalcon\Exception(di('lang')->_('user.login.error'));
+            return false;
+        }
     }
 }

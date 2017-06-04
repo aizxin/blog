@@ -1,14 +1,12 @@
 <?php
-
 namespace Sow\Models;
 
+use Sow\Roles\Models\Roles as Model;
+use Sow\Traits\InitTimestamp;
 
-use Sow\Roles\Contracts\AuthorizationInterface;
-use Sow\Roles\Traits\HasRolesAndPermissions;
-
-class User extends Model implements AuthorizationInterface
+class Role extends Model
 {
-    use HasRolesAndPermissions;
+    use InitTimestamp;
     /**
      *
      * @var integer
@@ -23,13 +21,6 @@ class User extends Model implements AuthorizationInterface
      * @var string
      * @Column(type="string", length=255, nullable=false)
      */
-    public $username;
-
-    /**
-     *
-     * @var string
-     * @Column(type="string", length=255, nullable=false)
-     */
     public $name;
 
     /**
@@ -37,33 +28,33 @@ class User extends Model implements AuthorizationInterface
      * @var string
      * @Column(type="string", length=255, nullable=false)
      */
-    public $email;
+    public $slug;
 
     /**
      *
      * @var string
-     * @Column(type="string", length=255, nullable=false)
+     * @Column(type="string", length=255, nullable=true)
      */
-    public $password;
+    public $description;
 
     /**
      *
-     * @var string
-     * @Column(type="string", length=100, nullable=true)
+     * @var integer
+     * @Column(type="integer", length=11, nullable=false)
      */
-    public $remember_token;
+    public $level;
 
     /**
      *
      * @var string
-     * @Column(type="string", nullable=false)
+     * @Column(type="string", nullable=true)
      */
     public $created_at;
 
     /**
      *
      * @var string
-     * @Column(type="string", nullable=false)
+     * @Column(type="string", nullable=true)
      */
     public $updated_at;
 
@@ -73,7 +64,6 @@ class User extends Model implements AuthorizationInterface
     public function initialize()
     {
         $this->setSchema("phalblog");
-        $this->hasRolesAndPermissions();
     }
 
     /**
@@ -83,14 +73,14 @@ class User extends Model implements AuthorizationInterface
      */
     public function getSource()
     {
-        return 'users';
+        return 'roles';
     }
 
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Users[]|Users
+     * @return Roles[]|Roles
      */
     public static function find($parameters = null)
     {
@@ -101,7 +91,7 @@ class User extends Model implements AuthorizationInterface
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Users
+     * @return Roles
      */
     public static function findFirst($parameters = null)
     {

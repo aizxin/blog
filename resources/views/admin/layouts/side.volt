@@ -1,11 +1,10 @@
 <div class="layui-side my-side">
     <div class="layui-side-scroll">
         <ul class="layui-nav layui-nav-tree" lay-filter="side">
-
             <li class="layui-nav-item layui-nav-itemed"><!-- 去除 layui-nav-itemed 即可关闭展开 -->
-                <a href="javascript:;"><i class="layui-icon">&#xe620;</i>基础</a>
+                <a href="javascript:;"><i class="layui-icon">&#xe620;</i>权限管理</a>
                 <dl class="layui-nav-child">
-                    <dd class="layui-nav-item"><a href="javascript:;" href-url="demo/btn.html"><i class="layui-icon">&#xe621;</i>按钮</a></dd>
+                    <dd class="layui-nav-item"><a href="{{ url("admin/permission") }}"><i class="layui-icon">&#xe621;</i>权限管理</a></dd>
                     <dd class="layui-nav-item"><a href="javascript:;" href-url="demo/form.html"><i class="layui-icon">&#xe621;</i>表单</a></dd>
                     <dd class="layui-nav-item"><a href="javascript:;" href-url="demo/table.html"><i class="layui-icon">&#xe621;</i>表格</a></dd>
                     <dd class="layui-nav-item"><a href="javascript:;" href-url="demo/tab-card.html"><i class="layui-icon">&#xe621;</i>选项卡</a></dd>

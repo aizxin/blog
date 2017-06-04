@@ -8,8 +8,11 @@
 // +----------------------------------------------------------------------
 namespace Sow\Models;
 
+use Sow\Traits\InitTimestamp;
+
 class Model extends \Phalcon\Mvc\Model
 {
+    use InitTimestamp;
     /**
      * Initialize method for model.
      */
