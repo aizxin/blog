@@ -106,6 +106,10 @@ return $lang = [
     'lottery.odd'             => '单',
     'lottery.total'           => '总',
 
+    /* setting */
+    'setting.success' => '操作成功',
+    'setting.error' => '操作失败',
+
     /* 验证 */
     'validator.user.PresenceOf'      => '账号不能为空',
     'validator.password.PresenceOf'  => '密码不能为空',

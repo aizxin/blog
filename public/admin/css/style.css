@@ -533,3 +533,56 @@ html body .layui-nav .layui-nav-bar {
         display: none;
     }
 }
+.layui-tab-content{
+    background-color: #F2F2F2;
+}
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+}
+.panel-padding {
+    padding: 20px 10px;
+}
+.larry-wrapper {
+    margin: 20px auto;
+}
+@media screen and (max-width:32.8571rem) {
+    .layui-form-item .layui-form-label {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        float: none;
+    }
+    .layui-form-item .layui-inline {
+        display: block;
+        margin-right: 0;
+        margin-bottom: 20px;
+        clear: both;
+    }
+    .layui-form-item .layui-inline:after {
+        content: '\20';
+        clear: both;
+        display: block;
+        height: 0;
+    }
+    .layui-form-item .layui-input-inline,
+    .layui-form-item .layui-input-block {
+        display: block;
+        float: none;
+        width: auto;
+        margin: 10px 0 10px 3px;
+    }
+    .layui-form-item .layui-input-inline+.layui-form-mid {
+        margin-left: 4px;
+        top: -5px;
+        padding: 0;
+    }
+    .layui-form-item .layui-form-checkbox {
+        margin-right: 5px;
+        margin-bottom: 5px;
+    }
+}

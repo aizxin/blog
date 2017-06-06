@@ -8,6 +8,7 @@
     <title>{{ lang._('backend') }}</title>
     <link href="{{ static_url('/admin/plugin/layui/css/layui.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ static_url('/admin/css/style.css') }}">
+    <link rel="stylesheet" href="{{ static_url('/admin/css/font-awesome.min.css') }}">
     <link rel="icon" href="{{ static_url('/admin/image/code.png') }}">
     {% block css %}{% endblock %}
 </head>
