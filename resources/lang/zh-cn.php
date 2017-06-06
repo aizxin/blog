@@ -109,6 +109,13 @@ return $lang = [
     /* setting */
     'setting.success' => '操作成功',
     'setting.error' => '操作失败',
+    'setting.save'  => '添加',
+    'setting.elDelete' => '删除',
+    'setting.allDelete' => '批量删除',
+    'setting.select' => '查找',
+    'setting.page' => '分页',
+    'setting.operate' => '操作',
+
 
     /* 验证 */
     'validator.user.PresenceOf'      => '账号不能为空',
