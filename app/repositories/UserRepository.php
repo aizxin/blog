@@ -28,6 +28,7 @@ class UserRepository extends AbstractRepository
                 throw new \Phalcon\Exception(di('lang')->_('use.login.error'));
                 return false;
             }
+            di('cache')->save('userPermissions',$userInfo->getPermissions()->toArray());
             di('session')->set('userInfo',$userInfo);
             return $userInfo;
         } catch (\Phalcon\Exception $e) {

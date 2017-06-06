@@ -43,6 +43,8 @@ class AuthController extends Controller
     {
          // 删除session变量
         $this->session->remove("userInfo");
+        // 删除用户的权限cache
+        $this->cache->delete("userPermissions");
         $this->response->redirect('admin/auth');
     }
 

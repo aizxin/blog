@@ -5,7 +5,7 @@ use Sow\Controllers\Controller as BaseController;
 class Controller extends BaseController
 {
     public function initialize(){
-        // $this->authCheck();
+        $this->authCheck();
     }
     /**
      *  [authCheck 判断管理员是否登录]
