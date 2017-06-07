@@ -7,25 +7,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>{{ lang._('backend') }}</title>
     <link href="{{ static_url('/admin/plugin/layui/css/layui.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ static_url('/admin/css/style.css') }}">
+    <link rel="stylesheet" href="{{ static_url('/admin/css/login.css') }}">
     <link rel="icon" href="{{ static_url('/admin/image/code.png') }}">
 </head>
-<body class="login-body">
-    <div class="login-main">
-        <header class="layui-elip">{{ lang._('backend') }}</header>
-        <form class="layui-form">
-            <input type="hidden" name="<?php echo $this->security->getTokenKey() ?>"
+<body class="beg-login-bg" >
+    <div class="beg-login-box">
+        <header>
+            <h1>{{ lang._('backend') }}</h1>
+        </header>
+        <div class="beg-login-main layui-form">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="beg-login-icon">
+                        <i class="layui-icon">&#xe612;</i>
+                    </label>
+                     <input type="hidden" name="<?php echo $this->security->getTokenKey() ?>"
         value="<?php echo $this->security->getToken() ?>"/>
-            <div class="layui-input-inline">
-                <input type="text" name="name" lay-verify="required" placeholder="{{ lang._('user.name') }}" autocomplete="off" class="layui-input">
-            </div>
-            <div class="layui-input-inline">
-                <input type="password" lay-verify="required|password" name="password" placeholder="{{ lang._('user.password') }}" autocomplete="off" class="layui-input">
-            </div>
-            <div class="layui-input-inline login-btn">
-                <button type="submit" class="layui-btn" lay-submit="" lay-filter="login">{{ lang._('handle.login') }}</button>
-            </div>
-        </form>
+                    <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="{{ lang._('user.name') }}" class="layui-input">
+                </div>
+                <div class="layui-form-item">
+                    <label class="beg-login-icon">
+                    <i class="layui-icon">&#xe642;</i>
+                </label>
+                    <input type="password" name="password" lay-verify="required|password" autocomplete="off" placeholder="{{ lang._('user.password') }}" class="layui-input">
+                </div>
+                <div class="layui-form-item">
+                    <div>
+                    <button class="layui-input layui-btn layui-btn-primary" lay-submit lay-filter="login" style="color: #fff;font-size: 18px;">
+                        {{ lang._('handle.login') }}
+                    </button>
+                    </div>
+                    <div class="beg-clear"></div>
+                </div>
+            </form>
+        </div>
+        <footer>
+            <p>技术 © <a href="https://izxin.com">Sow开发</a></p>
+        </footer>
     </div>
 </body>
 <script type="text/javascript" src="{{ static_url('/admin/plugin/layui/layui.js') }}"></script>

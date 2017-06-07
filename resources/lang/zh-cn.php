@@ -17,7 +17,8 @@ return $lang = [
     'handle.update.failed'   => '编辑失败',
     'handle.delete.success'  => '删除成功',
     'handle.delete.failed'   => '删除失败',
-    'handle.login'           => '登录',
+    'handle.login'           => '登  录',
+    'handle.check.token'     => '验证失败',
 
     /* menu */
     'menu.index'            => '喵一眼',

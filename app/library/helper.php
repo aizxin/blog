@@ -119,3 +119,28 @@ if ( !function_exists('setPassword')) {
         return sha1(md5( $password . env('UNIQUE_ID') ));
     }
 }
+
+/**
+ *  [setPassword 防止CSRF攻击]
+ *  @author Sow
+ *  @DateTime 2017-06-03T14:48:58+0800
+ *  @param    [type]                   $password [description]
+ */
+if ( !function_exists('securityCSRF')) {
+    function securityCSRF($request)
+    {
+        $tokenKeySessionID = '$PHALCON/CSRF/KEY$';
+
+        $tokenValueSessionID = '$PHALCON/CSRF$';
+        if(!di('session')->has($tokenKeySessionID)){
+            return false;
+        }
+        $tokenKey = di('session')->get($tokenKeySessionID);
+        $knownToken = di('session')->get($tokenValueSessionID);
+        $equals = hash_equals($knownToken, $request->$tokenKey);
+        // if ($equals) {
+        //     di('security')->destroyToken();
+        // }
+        return $equals;
+    }
+}

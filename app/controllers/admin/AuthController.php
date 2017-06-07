@@ -19,10 +19,14 @@ class AuthController extends Controller
         }
         if ($this->request->isPost()) {
             $request = $this->request->getJsonRawBody();
+            //防止攻击
+            if (!securityCSRF($request))return apiError($this->lang->_('handle.check.token'));
             try {
                 validate('auth')->validator($request);
                 try {
                     $user = $this->repo->getModel('user')->postLogin($request);
+                    // 操作成功后,删除CSRF的session
+                    $this->security->destroyToken();
                     return apiSuccess(count($user),$this->lang->_('user.login.success'));
                 } catch (\Phalcon\Exception $e) {
                     return apiError($e->getMessage());

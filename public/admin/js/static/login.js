@@ -11,7 +11,7 @@ layui.use(['form', 'layer'], function() {
         axios.post('/admin/auth', data.field)
             .then(function(response) {
                 if (response.data.code == 200) {
-                    layer.msg(response.data.message, { icon: 6, shade: 0.5,shift:1, time: 2000 }, function() {
+                    layer.msg(response.data.message, { icon: 6, shade: 0.5,shift:1, time: 1000 }, function() {
                         window.location.href = '/admin/index'
                     });
                 } else {

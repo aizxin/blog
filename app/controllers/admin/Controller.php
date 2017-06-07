@@ -4,6 +4,7 @@ use Sow\Controllers\Controller as BaseController;
 
 class Controller extends BaseController
 {
+
     public function initialize(){
         $this->authCheck();
     }
