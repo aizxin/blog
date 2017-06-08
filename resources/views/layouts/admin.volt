@@ -33,6 +33,11 @@
 <script type="text/javascript" src="{{ static_url('/admin/js/global.js') }}"></script>
 <script type="text/javascript" src="{{ static_url('/admin/plugin/axios/axios.min.js') }}"></script>
 <script type="text/javascript" src="{{ static_url('/admin/plugin/vue/vue.min.js') }}"></script>
+<script type="text/javascript">
+window.conf ={
+    APP:'<?php echo env("APP_URL"); ?>'
+};
+</script>
 {% block js %}{% endblock %}
 </body>
 </html>

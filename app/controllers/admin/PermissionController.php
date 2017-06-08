@@ -15,7 +15,7 @@ class PermissionController extends Controller
     public function indexAction()
     {
         if ($this->request->isPost()) {
-            $permission = $this->repo->getModel('permission')->getPage($this->request->getJsonRawBody());
+            $permission = $this->repo('permission')->getPage($this->request->getJsonRawBody());
             return apiSuccess($permission,$this->lang->_('setting.success'));
         }
         $this->view->pick('admin/permission/index');

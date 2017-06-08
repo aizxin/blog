@@ -3,9 +3,11 @@ namespace Sow\Controllers\Admin;
 
 use Sow\Controllers\Controller;
 use Sow\Validations\AuthValidation;
+use Sow\Traits\Controller as ControllerTraits;
 
 class AuthController extends Controller
 {
+    use ControllerTraits;
     /**
      *  [indexAction 管理员登录]
      *  @author Sow
@@ -14,25 +16,23 @@ class AuthController extends Controller
      */
     public function indexAction()
     {
-        if($this->session->has('userInfo')){
+        if($this->session->has('userInfo'))
             $this->response->redirect('admin/index');
-        }
         if ($this->request->isPost()) {
             $request = $this->request->getJsonRawBody();
             //防止攻击
-            if (!securityCSRF($request))return apiError($this->lang->_('handle.check.token'));
+            if (!$this->securityCSRF($request))
+                return apiError($this->lang->t('handle.check.token'));
+            //验证数据
+            if(!$this->validate('auth')->validator($request))
+                return apiError($this->validate('auth')->firstMessage());
             try {
-                validate('auth')->validator($request);
-                try {
-                    $user = $this->repo->getModel('user')->postLogin($request);
-                    // 操作成功后,删除CSRF的session
-                    $this->security->destroyToken();
-                    return apiSuccess(count($user),$this->lang->_('user.login.success'));
-                } catch (\Phalcon\Exception $e) {
-                    return apiError($e->getMessage());
-                }
-            } catch (\Phalcon\Validation\Exception $ex) {
-                return apiError($ex->getMessage());
+                $user = $this->repo('user')->postLogin($request);
+                // 操作成功后,删除CSRF的session
+                // $this->security->destroyToken();
+                return apiSuccess(count($user),$this->lang->t('user.login.success'));
+            } catch (\Phalcon\Exception $e) {
+                return apiError($e->getMessage());
             }
         }
         $this->view->pick('admin/auth/login');

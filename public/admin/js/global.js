@@ -1,7 +1,8 @@
 layui.config({
-    base: '/admin/js/modules/',
+    base: '/admin/js/',
 }).extend({
-    sow: 'sow'
+    sow: 'modules/sow',
+    lang: 'lang/zh-en'
 });
 layui.use(['layer', 'element', 'util'], function() {
     var element = layui.element(),
@@ -54,34 +55,6 @@ layui.use(['layer', 'element', 'util'], function() {
         }
 
     });
-
-    // 添加TAB选项卡
-    function addTab(element, elem) {
-        var card = 'card'; // 选项卡对象
-        var title = elem.children('a').html(); // 导航栏text
-        var src = elem.children('a').attr('href-url'); // 导航栏跳转URL
-        var id = new Date().getTime(); // ID
-        var flag = getTitleId(card, title); // 是否有该选项卡存在
-        // 大于0就是有该选项卡了
-        if (flag > 0) {
-            id = flag;
-        } else {
-            if (src) {
-                //新增
-                element.tabAdd(card, {
-                    title: '<span>' + title + '</span>',
-                    content: '<iframe src="' + src + '" frameborder="0"></iframe>',
-                    id: id
-                });
-                // 关闭弹窗
-                layer.closeAll();
-            }
-        }
-        // 切换相应的ID tab
-        element.tabChange(card, id);
-        // 提示信息
-        layer.msg(title);
-    }
 
     // 根据导航栏text获取lay-id
     function getTitleId(card, title) {

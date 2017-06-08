@@ -30,4 +30,22 @@ class PermissionRepository extends AbstractRepository
         );
         return $paginator->getPaginate();
     }
+    /**
+     *  [findById getModelsManager 测试]
+     *  @author Sow
+     *  @DateTime 2017-06-08T21:17:00+0800
+     *  @param    [type]                   $aid [description]
+     *  @return   [type]                        [description]
+     */
+    public function findById($aid){
+        $aid = intval($aid);
+        if($aid <= 0){
+            throw new \Exception('参数错误');
+        }
+        $phql = "SELECT * FROM \Sow\Models\Permission WHERE id = :aid: ";
+        $result = $this->model->getModelsManager()->executeQuery($phql, array(
+            'aid' => $aid
+        ));
+        return $result->toArray();
+    }
 }

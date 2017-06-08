@@ -7,10 +7,12 @@ use Sow\Models\User;
 class UserRepository extends AbstractRepository
 {
     protected $model;
+    protected $lang;
 
     public function __construct()
     {
         $this->model = new User();
+        $this->lang = di('lang');
     }
     /**
      *  [postLogin 管理员登录]
@@ -22,18 +24,17 @@ class UserRepository extends AbstractRepository
     public function postLogin($request)
     {
         $data['name'] = $request->name;
-        try {
-            $userInfo = $this->firstBy($data);
-            if($userInfo->password != setPassword($request->password)){
-                throw new \Phalcon\Exception(di('lang')->_('use.login.error'));
-                return false;
-            }
-            di('cache')->save('userPermissions',$userInfo->getPermissions()->toArray());
-            di('session')->set('userInfo',$userInfo);
-            return $userInfo;
-        } catch (\Phalcon\Exception $e) {
-            throw new \Phalcon\Exception(di('lang')->_('user.login.error'));
+        $userInfo = $this->firstBy($data);
+        if(!$userInfo){
+            throw new \Phalcon\Exception($this->lang->t('user.login.error'));
             return false;
         }
+        if($userInfo->password != setMd5($request->password)){
+            throw new \Phalcon\Exception($this->lang->t('user.login.error'));
+            return false;
+        }
+        di('cache')->save('userPermissions',$userInfo->getPermissions()->toArray());
+        di('session')->set('userInfo',$userInfo);
+        return $userInfo;
     }
 }

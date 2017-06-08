@@ -6,6 +6,7 @@ class IndexController extends Controller
 {
     public function indexAction()
     {
+        // $this->view->disable();
         $this->view->pick('admin/index/index');
         // return $this->view->render('admin', 'index');
     }

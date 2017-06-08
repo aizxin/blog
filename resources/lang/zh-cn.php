@@ -20,23 +20,15 @@ return $lang = [
     'handle.login'           => '登  录',
     'handle.check.token'     => '验证失败',
 
-    /* menu */
-    'menu.index'            => '喵一眼',
-    'menu.content'          => '内容管理',
-    'menu.article'          => '文章管理',
-    'menu.article_new'      => '新文章',
-    'menu.article_index'    => '所有文章',
-    'menu.category'         => '文章分类',
-    'menu.tag'              => '标签管理',
-    'menu.comment'          => '留言管理',
-    'menu.system'           => '系统管理',
-    'menu.user'             => '用户管理',
-    'menu.setting'          => '设置',
-    'menu.lottery'          => '彩票',
-    'menu.lottery_three'    => '前四热号',
-    'menu.lottery_groupsix' => '组六',
-    'menu.lottery_always'   => '连续号概率',
-    'menu.lottery_policy'   => '连续号',
+    /* permission */
+    'permission.index'       => '喵一眼',
+    'permission.parent_id'   => '权限顶级',
+    'permission.ismenu'      => '是否菜单',
+    'permission.name'        => '权限名称',
+    'permission.slug'        => '权限别名',
+    'permission.description' => '权限描述',
+    'permission.icon'        => '权限图标',
+    'permission.issort'      => '权限排序',
 
     /* breadcrumb */
     'category/index' => '',
@@ -74,7 +66,6 @@ return $lang = [
     'article.is_show'       => '是否显示',
     'article.is_show.title'       => '显示',
     'article.created_at'    => '发布日期',
-    'article.link.hint'     => '※ 输入后可作为永久链接，比如 http://miao.blog/article/<span class="color-warning">miao-blog-by-phalcon-php</span>，方便 文章转载 和 SEO，允许输入 英文字母、数字 和 -',
 
 
     /* category */
@@ -96,16 +87,6 @@ return $lang = [
     'user.login.success' => '登录成功',
 
 
-    /* lottery */
-    'lottery/three'           => '前四热号',
-    'lottery/groupsix'        => '组六',
-    'lottery/always'          => '连续号概率',
-    'lottery/policy'          => '连续号',
-    'lottery.small'           => '小',
-    'lottery.big'             => '大',
-    'lottery.even'            => '双',
-    'lottery.odd'             => '单',
-    'lottery.total'           => '总',
 
     /* setting */
     'setting.success' => '操作成功',

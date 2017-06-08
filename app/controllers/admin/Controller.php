@@ -1,10 +1,10 @@
 <?php
 namespace Sow\Controllers\Admin;
 use Sow\Controllers\Controller as BaseController;
-
+use Sow\Traits\Controller as ControllerTraits;
 class Controller extends BaseController
 {
-
+    use ControllerTraits;
     public function initialize(){
         $this->authCheck();
     }
