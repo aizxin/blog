@@ -18,7 +18,6 @@ layui.use(['sow', 'lang', 'form', 'laypage'], function() {
             list: function() {
                 var _this = this;
                 axios.post(sow.U('admin/permission'), this.search).then(function(response) {
-                    console.log(_this.pages, response.data.result.total_pages);
                     if (_this.pages != response.data.result.total_pages) {
                         _this.$set('pages', response.data.result.total_pages);
                         _this.page();

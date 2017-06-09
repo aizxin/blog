@@ -2,7 +2,7 @@
 {% block css %}
 {% endblock %}
 {% block content %}
-<div class="layui-body">
+<div class="layui-body" id="app">
     <div class="layui-tab-content" style="padding: 16px;">
         <div class="larry-wrapper">
             <section class="panel panel-padding">

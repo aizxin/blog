@@ -12,7 +12,7 @@
     <link rel="icon" href="{{ static_url('/admin/image/code.png') }}">
     {% block css %}{% endblock %}
 </head>
-<body id="app">
+<body>
 <!-- admin -->
 <div class="layui-layout layui-layout-admin"> <!-- 添加skin-1类可手动修改主题为纯白，添加skin-2类可手动修改主题为蓝白 -->
     <!-- header -->
@@ -29,6 +29,7 @@
 </div>
 <script type="text/javascript" src="{{ static_url('/admin/plugin/layui/layui.js') }}"></script>
 <script type="text/javascript" src="{{ static_url('/admin/js/global.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('/admin/plugin/es6-promise/promise.min.js') }}"></script>
 <script type="text/javascript" src="{{ static_url('/admin/plugin/axios/axios.min.js') }}"></script>
 <script type="text/javascript" src="{{ static_url('/admin/plugin/vue/vue.min.js') }}"></script>
 <script type="text/javascript">
