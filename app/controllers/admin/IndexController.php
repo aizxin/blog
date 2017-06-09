@@ -4,6 +4,9 @@ use Sow\Controllers\Admin\Controller;
 
 class IndexController extends Controller
 {
+    public function initialize(){
+        parent::initialize();
+    }
     public function indexAction()
     {
         // $this->view->disable();

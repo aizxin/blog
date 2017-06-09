@@ -4,10 +4,18 @@ namespace Sow\Controllers\Admin;
 use Sow\Controllers\Controller;
 use Sow\Validations\AuthValidation;
 use Sow\Traits\Controller as ControllerTraits;
+use Sow\Repositories\Admin\UserRepository;
 
 class AuthController extends Controller
 {
     use ControllerTraits;
+    protected $uRepo;
+    protected $aVa;
+    public function initialize()
+    {
+        $this->uRepo = new UserRepository();
+        $this->aVa = new AuthValidation();
+    }
     /**
      *  [indexAction 管理员登录]
      *  @author Sow
@@ -24,12 +32,10 @@ class AuthController extends Controller
             if (!$this->securityCSRF($request))
                 return apiError($this->lang->t('handle.check.token'));
             //验证数据
-            if(!$this->validate('auth')->validator($request))
-                return apiError($this->validate('auth')->firstMessage());
+            if(!$this->aVa->validator($request))
+                return apiError($this->aVa->firstMessage());
             try {
-                $user = $this->repo('user')->postLogin($request);
-                // 操作成功后,删除CSRF的session
-                // $this->security->destroyToken();
+                $user = $this->uRepo->postLogin($request);
                 return apiSuccess(count($user),$this->lang->t('user.login.success'));
             } catch (\Phalcon\Exception $e) {
                 return apiError($e->getMessage());

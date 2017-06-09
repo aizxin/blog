@@ -12,7 +12,7 @@
     <link rel="icon" href="{{ static_url('/admin/image/code.png') }}">
     {% block css %}{% endblock %}
 </head>
-<body>
+<body id="app">
 <!-- admin -->
 <div class="layui-layout layui-layout-admin"> <!-- 添加skin-1类可手动修改主题为纯白，添加skin-2类可手动修改主题为蓝白 -->
     <!-- header -->
@@ -20,9 +20,7 @@
     <!-- side -->
     {% include "admin/layouts/side.volt" %}
     <!-- body -->
-    <div class="layui-body my-body">
-        {% block content %}{% endblock %}
-    </div>
+    {% block content %}{% endblock %}
     <!-- footer -->
     <div class="layui-footer my-footer">
         <p><a href="http://vip-admin.com" target="_blank">后台模板</a>&nbsp;&nbsp;&&nbsp;&nbsp;<a href="http://vip-admin.com/index/gather/index.html" target="_blank">管理系统</a></p>

@@ -13,6 +13,7 @@ $loader->registerNamespaces([
     'Sow\Controllers\Admin' => $config->application->controllersDir  . '/admin/',
     'Sow\Validations' => $config->application->validationsDir,
     'Sow\Repositories' => $config->application->repositoriesDir,
+    'Sow\Repositories\Admin' => $config->application->repositoriesDir . '/admin/',
     'Sow\Services' => $config->application->servicesDir,
     'Sow\Traits'   => $config->application->traitsDir,
 ])->registerFiles(

@@ -21,9 +21,10 @@ trait Controller
         $tokenKey = $this->session->get($tokenKeySessionID);
         $knownToken = $this->session->get($tokenValueSessionID);
         $equals = hash_equals($knownToken, $request->$tokenKey);
-        // if ($equals) {
-        //     di('security')->destroyToken();
-        // }
+        if ($equals) {
+            // 操作成功后,删除CSRF的session
+            $this->security->destroyToken();
+        }
         return $equals;
     }
     /**
