@@ -65,7 +65,8 @@ return new \Phalcon\Config([
         'password'    => env('DB_PASSWORD','secret'),
         'dbname'      => env('DB_DATABASE','secret'),
         'charset'     => 'utf8',
-        'dbport'      => env('DB_PORT', '3306')
+        'dbport'      => env('DB_PORT', '3306'),
+        'dblisten'    => env('LISTEN', 'false')
     ],
     'redis' => [
         'host' => env('REDIS_HOST', '127.0.0.1'),

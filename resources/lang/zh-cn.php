@@ -29,6 +29,7 @@ return $lang = [
     'permission.description' => '权限描述',
     'permission.icon'        => '权限图标',
     'permission.issort'      => '权限排序',
+    'permission.create'      => '权限添加',
 
     /* breadcrumb */
     'category/index' => '',
@@ -51,7 +52,20 @@ return $lang = [
     'common.total'          => '共',
     'common.records_count'  => "条记录",
     'common.placeholder.content' => '请输入内容',
+    'common.up'             => "请输入",
+    'common.no'             => "否",
+    'common.yes'            => "是",
+    'common.select'         => '选择',
 
+    /* setting */
+    'setting.success' => '操作成功',
+    'setting.error' => '操作失败',
+    'setting.save'  => '添加',
+    'setting.elDelete' => '删除',
+    'setting.allDelete' => '批量删除',
+    'setting.select' => '查找',
+    'setting.page' => '分页',
+    'setting.operate' => '操作',
 
     /* article */
     'article.user'          => '作者',
@@ -88,15 +102,6 @@ return $lang = [
 
 
 
-    /* setting */
-    'setting.success' => '操作成功',
-    'setting.error' => '操作失败',
-    'setting.save'  => '添加',
-    'setting.elDelete' => '删除',
-    'setting.allDelete' => '批量删除',
-    'setting.select' => '查找',
-    'setting.page' => '分页',
-    'setting.operate' => '操作',
 
 
     /* 验证 */

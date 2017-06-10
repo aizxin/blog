@@ -16,6 +16,10 @@ layui.define('jquery', function(exports) {
         },
         user:{
             login:'登录'
+        },
+        permission:{
+            create:'权限添加',
+            icon:'图标选择'
         }
     };
     exports('lang', lang);

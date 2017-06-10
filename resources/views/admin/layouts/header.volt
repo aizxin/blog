@@ -1,5 +1,5 @@
 <div class="layui-header my-header">
-    <a href="index.html">
+    <a href="{{ url("admin/index") }}">
         <!--<img class="my-header-logo" src="" alt="logo">-->
         <div class="my-header-logo">Sow 管理系统</div>
     </a>

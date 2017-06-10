@@ -526,6 +526,10 @@ html body .layui-nav .layui-nav-bar {
     .layui-layout-admin .layui-footer {
         left: 0;
     }
+    .layui-body{
+        position: relative;
+        left: 0!important;
+    }
 }
 
 @media screen and ( max-width: 450px) {
@@ -589,4 +593,7 @@ html body .layui-nav .layui-nav-bar {
 /* page */
 .text-right{
     text-align: right;
+}
+.layui-body-index {
+    z-index: 1!important;
 }

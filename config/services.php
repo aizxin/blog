@@ -52,7 +52,7 @@ $di->setShared('view', function () {
 /**
  * Database connection is created based in the parameters defined in the configuration file
  */
-$di->setShared('db', function () {
+$di->setShared('db', function () use ($di){
     $config = $this->getConfig();
 
     $class = 'Phalcon\Db\Adapter\Pdo\\' . $config->database->adapter;
@@ -68,8 +68,23 @@ $di->setShared('db', function () {
     if ($config->database->adapter == 'Postgresql') {
         unset($params['charset']);
     }
-
+    // 连接数据库
     $connection = new $class($params);
+
+    if($config->database->dblisten){
+        // 打印sql日志
+        $eventsManager = new \Phalcon\Events\Manager();
+        $logger = $di->get('logger');
+
+        // 监听所有数据库事件
+        $eventsManager->attach('db', function ($event, $connection) use ($logger) {
+            if ($event->getType() == 'beforeQuery') {
+                $logger->info($connection->getSQLStatement());
+            }
+        });
+        // 设置事件管理器
+        $connection->setEventsManager($eventsManager);
+    }
 
     return $connection;
 });

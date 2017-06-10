@@ -1,10 +1,3 @@
-// 配置
-layui.config({
-    base: '/admin/js/'  // 模块目录
-}).extend({                     // 模块别名
-    sow: 'modules/sow',
-    lang: 'lang/zh-en'
-});
 layui.use(['layer', 'element', 'util'], function () {
     var element = layui.element(), layer = layui.layer, $ = layui.jquery, util = layui.util; //导航的hover效果、二级菜单等功能，需要依赖element模块
     var side = $('.my-side');
@@ -200,10 +193,6 @@ layui.use(['layer', 'element', 'util'], function () {
         // 设置高度
         $(document).find(".layui-tab[lay-filter='card'] div.layui-tab-content").height( height - 2 );
     }
-
     // 初始化
     init();
-
-
-
 });

@@ -21,9 +21,18 @@ class PermissionRepository extends AbstractRepository
      */
     public function getPage($request)
     {
+        $map = [];
+        if(!empty($request->name)){
+            $map = [
+                "name like :name:",
+                "bind" => [
+                    "name" => '%'.$request->name.'%'
+                ]
+            ];
+        }
         $paginator = new \Phalcon\Paginator\Adapter\Model(
             [
-                "data"  => $this->model->find(),
+                "data"  => $this->model->find($map),
                 "limit" => $request->pageSize,
                 "page"  => $request->page
             ]
