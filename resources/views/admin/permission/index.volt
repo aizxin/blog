@@ -30,7 +30,7 @@
                                         <option value="100">100</option>
                                         <option value="200">200</option>
                                     </select>
-                                    <button @click="addPermission()" class="layui-btn layui-btn-small layui-btn-danger ajax-all">
+                                    <button @click="addHtml()" class="layui-btn layui-btn-small layui-btn-danger ajax-all">
                                         <i class="fa fa-trash"></i>{{ lang.t('setting.save') }}
                                     </button>
                                     <button class="layui-btn layui-btn-small">
@@ -66,8 +66,8 @@
                                                             <td v-text="item.slug"></td>
                                                             <td>
                                                                 <div class="layui-btn-group">
-                                                                    <button class="layui-btn layui-btn-primary layui-btn-small" @click="edithtml(vo.id)"><i class="layui-icon"></i></button>
-                                                                    <button class="layui-btn layui-btn-danger layui-btn-small" @click="elDelete(vo.id)"><i class="layui-icon"></i></button>
+                                                                    <button class="layui-btn layui-btn-primary layui-btn-small" @click="editHtml(item.id)"><i class="layui-icon"></i></button>
+                                                                    <button class="layui-btn layui-btn-danger layui-btn-small" @click="elDelete(item.id)"><i class="layui-icon"></i></button>
                                                             </div>
                                                             </td>
                                                         </tr>

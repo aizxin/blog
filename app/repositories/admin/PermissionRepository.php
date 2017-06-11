@@ -43,6 +43,27 @@ class PermissionRepository extends AbstractRepository
 
     }
     /**
+     *  [storePermission 权限节点添加/更新]
+     *  @author Sow
+     *  @DateTime 2017-06-11T20:18:30+0800
+     *  @param    [type]                   $request [description]
+     *  @return   [type]                            [description]
+     */
+    public function storePermission($request)
+    {
+        $data = [
+            'parent_id'=>$request->parent_id,
+            'ismenu'=>$request->ismenu,
+            'name'=>$request->name,
+            'slug'=>$request->slug,
+            'description'=>$request->description,
+            'icon'=>$request->icon,
+            'issort'=>$request->issort,
+        ];
+        if (isset($request->id))return $this->updateById($request->id,$data);
+        return $this->create($data);
+    }
+    /**
      *  [findById getModelsManager 测试]
      *  @author Sow
      *  @DateTime 2017-06-08T21:17:00+0800
@@ -59,5 +80,9 @@ class PermissionRepository extends AbstractRepository
             'aid' => $aid
         ));
         return $result->toArray();
+    }
+    public function FunctionName($value='')
+    {
+        # code...
     }
 }

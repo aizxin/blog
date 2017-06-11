@@ -91,5 +91,30 @@ layui.define(['jquery','layer'], function(exports) {
     sow.msgS = function(message,fn){
         return layer.msg(message,{ icon: 6, shade: 0.5,shift:1, time: 1000 },fn);
     }
+    /**
+     *  [open description]
+     *  @author Sow
+     *  @DateTime 2017-06-11T23:15:25+0800
+     *  @param    {[type]}                 lang [description]
+     *  @param    {[type]}                 url  [description]
+     *  @return   {[type]}                      [description]
+     */
+    sow.open = function(lang,url,area){
+        var indexLoad = layer.load(1);
+        layer.open({
+            type: 2, //1:test//2:url
+            title: lang,
+            shade: 0.3,
+            full: false,
+            shadeClose: true,
+            maxmin: true, //开启最大化最小化按钮
+            area: area,
+            anim: 1, // 动作方向
+            content: url,
+            success: function(layero, index){
+                layer.close(indexLoad);
+            }
+        });
+    }
     exports('sow', sow);
 });

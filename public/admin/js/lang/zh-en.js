@@ -22,7 +22,8 @@ layui.define('jquery', function(exports) {
         },
         permission:{
             create:'权限添加',
-            icon:'图标选择'
+            icon:'图标选择',
+            edit:'权限修改'
         }
     };
     exports('lang', lang);

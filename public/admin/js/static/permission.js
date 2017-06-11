@@ -2,7 +2,7 @@ layui.use(['sow', 'lang', 'form', 'laypage'], function() {
     var lang = layui.lang,
         sow = layui.sow,
         $ = layui.jquery
-        form = layui.form();
+    form = layui.form();
     $(function() {
         window.conf.vn = new Vue({
             el: '#app',
@@ -51,23 +51,16 @@ layui.use(['sow', 'lang', 'form', 'laypage'], function() {
                     this.$set(this, 'search.pageSize', pages);
                     this.list();
                 },
-                addPermission: function() {
-                    layer.open({
-                        type: 2, //1:test//2:url
-                        title: lang.permission.create,
-                        shade: 0.3,
-                        full: false,
-                        shadeClose: true,
-                        maxmin: true, //开启最大化最小化按钮
-                        area: ['893px', '700px'],
-                        anim: 1, // 动作方向
-                        content: [sow.U("admin/permission/create"), 'yes']
-                    });
+                addHtml: function() {
+                    sow.open(lang.permission.create,sow.U("admin/permission/create"),['893px', '700px']);
                 },
-                topList:function(){
+                topList: function() {
                     this.search.pageSize = 15;
                     this.search.page = 1;
                     this.list();
+                },
+                editHtml: function(id) {
+                    sow.open(lang.permission.edit,sow.U("admin/permission/"+id+"/edit"),['893px', '700px']);
                 }
             }
         });
