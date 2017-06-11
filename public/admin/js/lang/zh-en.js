@@ -11,6 +11,9 @@ layui.define('jquery', function(exports) {
     var $ = layui.jquery;
     var lang = lang || {};
     lang = {
+        sys:{
+            error:'系统错误'
+        },
         setting:{
 
         },

@@ -28,14 +28,15 @@ class AuthController extends Controller
             $this->response->redirect('admin/index');
         if ($this->request->isPost()) {
             $request = $this->request->getJsonRawBody();
-            //防止攻击
-            if (!$this->securityCSRF($request))
-                return apiError($this->lang->t('handle.check.token'));
             //验证数据
             if(!$this->aVa->validator($request))
                 return apiError($this->aVa->firstMessage());
+            //防止攻击
+            if (!$this->securityCSRF($request))
+                return apiError($this->lang->t('handle.check.token'));
             try {
                 $user = $this->uRepo->postLogin($request);
+                $this->security->destroyToken();
                 return apiSuccess(count($user),$this->lang->t('user.login.success'));
             } catch (\Phalcon\Exception $e) {
                 return apiError($e->getMessage());

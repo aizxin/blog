@@ -7,12 +7,20 @@
 namespace Sow\Repositories;
 
 class RepositoryFactory{
-
     /**
      * 仓库对象容器
      * @var array
      */
     private static $_repositories = array();
+
+    protected $modelName;
+
+    public function __construct($modelName)
+    {
+        $this->modelName = $modelName;
+        return $this->getModel($this->modelName);
+    }
+
 
     /**
      * 获取仓库对象

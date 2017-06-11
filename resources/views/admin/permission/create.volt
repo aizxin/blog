@@ -9,9 +9,12 @@
         <div class="layui-input-inline">
             <select name="parent_id">
                 <option value="0" selected>{{ lang.t('common.up') }}{{ lang.t('permission.parent_id') }}</option>
-                <option value="浙江" selected="">浙江省</option>
-                <option value="你的工号">江西省</option>
-                <option value="你最喜欢的老师">福建省</option>
+                {% for item in permission %}
+                    <option value="{{ item['id'] }}">{{item['name']}}</option>
+                    {% for vo in item['child'] %}
+                        <option value="{{ vo['id'] }}">&nbsp;├&nbsp;{{ vo['name'] }}</option>
+                    {% endfor %}
+                {% endfor %}
             </select>
         </div>
     </div>
@@ -64,39 +67,5 @@
 </form>
 {% endblock %}
 {% block js %}
-<script type="text/javascript">
-    layui.use(['form', 'layedit','lang','sow'], function(){
-        var form = layui.form(),
-        layer = layui.layer,
-        lang = layui.lang,
-        sow = layui.sow,
-        $ = layui.jquery,
-        layedit = layui.layedit;
-        //创建一个编辑器
-        var editIndex = layedit.build('LAY_demo_editor');
-
-        //监听提交
-        form.on('submit(addPermissionStore)', function(data){
-            layer.msg(JSON.stringify(data.field));
-            console.log(parent.conf.vn);
-            return false;
-        });
-        $('.layui-btn-icon').on('click',function(){
-            layer.open({
-                type: 2, //1:test//2:url
-                title: lang.permission.icon,
-                full: false,
-                shadeClose: true,
-                shade: 0.5,
-                zIndex:99999999,
-                maxmin: true, //开启最大化最小化按钮
-                area: ['700px', '500px'],
-                anim: 1, // 动作方向
-                content: sow.U('admin/icon'),
-                success:function(layero, index){}
-            });
-        });
-
-    });
-</script>
+<script type="text/javascript" src="{{ static_url('/admin/js/static/permission-add.js')}}"></script>
 {% endblock %}

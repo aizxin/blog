@@ -15,7 +15,7 @@ layui.use(['form', 'layer'], function() {
                         window.location.href = '/admin/index'
                     });
                 } else {
-                    layer.msg(response.data.message,{shift:1,shade: 0.5});
+                    layer.msg(response.data.message,{icon: 5,shift:1,shade: 0.5});
                 }
             }).catch(function(error) {
                 console.log(error);

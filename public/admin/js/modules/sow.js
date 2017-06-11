@@ -6,9 +6,9 @@
 
 */
 
-layui.define('jquery', function(exports) {
+layui.define(['jquery','layer'], function(exports) {
     "use strict";
-    var $ = layui.jquery;
+    var $ = layui.jquery,layer = layui.layer;
     var sow = sow || {};
     sow.parse_url = function(url) {
         var parse = url.match(/^(?:([a-z]+):\/\/)?([\w-]+(?:\.[\w-]+)+)?(?::(\d+))?([\w-\/]+)?(?:\?((?:\w+=[^#&=\/]*)?(?:&\w+=[^#&=\/]*)*))?(?:#([\w-]+))?$/i);
@@ -61,6 +61,35 @@ layui.define('jquery', function(exports) {
         url = window.conf.APP + "/" + url;
         return url;
     };
-
+    /**
+     *  [load 加载。。。]
+     *  @author Sow
+     *  @DateTime 2017-06-11T14:41:34+0800
+     *  @return   {[type]}                 [description]
+     */
+    sow.load = function(index){
+        return layer.load(index, {shade: 0.5});
+    }
+    /**
+     *  [msgE 错误]
+     *  @author Sow
+     *  @DateTime 2017-06-11T14:42:51+0800
+     *  @param    {[type]}                 index [description]
+     *  @return   {[type]}                       [description]
+     */
+    sow.msgE = function(message){
+        return layer.msg(message,{icon: 5,shift:1,shade: 0.5});
+    }
+    /**
+     *  [msgS 成功]
+     *  @author Sow
+     *  @DateTime 2017-06-11T14:45:52+0800
+     *  @param    {[type]}                 message [description]
+     *  @param    {Function}               fn      [description]
+     *  @return   {[type]}                         [description]
+     */
+    sow.msgS = function(message,fn){
+        return layer.msg(message,{ icon: 6, shade: 0.5,shift:1, time: 1000 },fn);
+    }
     exports('sow', sow);
 });

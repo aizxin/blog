@@ -6,7 +6,8 @@ class IndexController extends Controller
 {
     public function indexAction()
     {
-        // $this->view->disable();
+        echo phpinfo();
+        $this->view->disable();
     }
 
 }

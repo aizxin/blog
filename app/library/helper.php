@@ -119,3 +119,25 @@ if ( !function_exists('setMd5')) {
         return sha1(md5( $password . env('UNIQUE_ID') ));
     }
 }
+/**
+ *  递归迭代无限级分类
+ */
+if (! function_exists('sort_parent')) {
+    /**
+     *  [sort_parent description]
+     */
+    function sort_parent($menus,$pid=0)
+    {
+        $arr = [];
+        if (empty($menus)) {
+            return '';
+        }
+        foreach ($menus as $key => $v) {
+            if ($v['parent_id'] == $pid) {
+                $v['child'] = sort_parent($menus,$v['id']);
+                $arr[] = $v;
+            }
+        }
+        return $arr;
+    }
+}

@@ -20,6 +20,7 @@ layui.use(['layer', 'element', 'util'], function () {
         side.animate({'left':-200},time);
         body.animate({'left':0},time);
         footer.animate({'left':0},time);
+        $(document).find('.layui-body').animate({'left':0},time);
     }
 
     // 导航栏展开
@@ -29,6 +30,7 @@ layui.use(['layer', 'element', 'util'], function () {
         side.animate({'left':0},time);
         body.animate({'left':200},time);
         footer.animate({'left':200},time);
+        $(document).find('.layui-body').animate({'left':200},time);
     }
 
     // 监听导航(side)点击切换页面

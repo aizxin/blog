@@ -29,7 +29,7 @@
                     <label class="beg-login-icon">
                     <i class="layui-icon">&#xe642;</i>
                 </label>
-                    <input type="password" name="password" lay-verify="required" autocomplete="off" placeholder="{{ lang._('user.password') }}" class="layui-input">
+                    <input type="password" name="password" lay-verify="required|password" autocomplete="off" placeholder="{{ lang._('user.password') }}" class="layui-input">
                 </div>
                 <div class="layui-form-item">
                     <div>

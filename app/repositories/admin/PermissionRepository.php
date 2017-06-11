@@ -3,9 +3,10 @@ namespace Sow\Repositories\Admin;
 
 use MicheleAngioni\PhalconRepositories\AbstractRepository;
 use Sow\Models\Permission;
-
+use Sow\Traits\Repository;
 class PermissionRepository extends AbstractRepository
 {
+    use Repository;
     protected $model;
 
     public function __construct()
@@ -22,22 +23,24 @@ class PermissionRepository extends AbstractRepository
     public function getPage($request)
     {
         $map = [];
-        if(!empty($request->name)){
-            $map = [
-                "name like :name:",
-                "bind" => [
-                    "name" => '%'.$request->name.'%'
-                ]
-            ];
-        }
-        $paginator = new \Phalcon\Paginator\Adapter\Model(
-            [
-                "data"  => $this->model->find($map),
-                "limit" => $request->pageSize,
-                "page"  => $request->page
-            ]
-        );
-        return $paginator->getPaginate();
+        if(!empty($request->name))
+            $map['name'] = ['%'.$request->name.'%', 'LIKE'];
+        return $this->getPaginate($map,$request);
+    }
+    /**
+     *  [getParent 顶级权限]
+     *  @author Sow
+     *  @DateTime 2017-06-11T10:58:19+0800
+     *  @return   [type]                   [description]
+     */
+    public function getMenu()
+    {
+        if(di('cache')->exists('permissionMenu'))
+            return di('cache')->get('permissionMenu');
+        $permission = sort_parent($this->getBy(['ismenu'=>1])->toArray());
+        di('cache')->save('permissionMenu',$permission);
+        return $permission;
+
     }
     /**
      *  [findById getModelsManager 测试]

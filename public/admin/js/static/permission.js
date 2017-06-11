@@ -59,10 +59,15 @@ layui.use(['sow', 'lang', 'form', 'laypage'], function() {
                         full: false,
                         shadeClose: true,
                         maxmin: true, //开启最大化最小化按钮
-                        area: ['893px', '600px'],
+                        area: ['893px', '700px'],
                         anim: 1, // 动作方向
                         content: [sow.U("admin/permission/create"), 'yes']
                     });
+                },
+                topList:function(){
+                    this.search.pageSize = 15;
+                    this.search.page = 1;
+                    this.list();
                 }
             }
         });

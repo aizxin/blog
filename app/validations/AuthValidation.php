@@ -11,18 +11,13 @@ class AuthValidation extends SowValidation
     public function initialize()
     {
         $this->add(
-            "name",
+            ["name","password"],
             new PresenceOf(
                 [
-                    "message" => $this->lang->_('validator.user.PresenceOf')
-                ]
-            )
-        );
-        $this->add(
-            "password",
-            new PresenceOf(
-                [
-                    "message" => $this->lang->_('validator.password.PresenceOf')
+                    "message" => [
+                       "name" => $this->lang->t('user.name').$this->lang->t('validator.PresenceOf'),
+                       "password" => $this->lang->t('user.password').$this->lang->t('validator.PresenceOf')
+                    ]
                 ]
             )
         );
@@ -32,8 +27,8 @@ class AuthValidation extends SowValidation
                 [
                     "max"            => 12,
                     "min"            => 6,
-                    "messageMaximum" => $this->lang->_('validator.password.max'),
-                    "messageMinimum" => $this->lang->_('validator.password.min')
+                    "messageMaximum" => $this->lang->t('user.password').$this->lang->t('validator.max'),
+                    "messageMinimum" => $this->lang->t('user.password').$this->lang->t('validator.min')
                 ]
             )
         );

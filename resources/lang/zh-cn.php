@@ -105,8 +105,8 @@ return $lang = [
 
 
     /* 验证 */
-    'validator.user.PresenceOf'      => '账号不能为空',
-    'validator.password.PresenceOf'  => '密码不能为空',
-    'validator.password.max'         => '密码不能多12字符',
-    'validator.password.min'         => '密码不能少6字符',
+    'validator.PresenceOf'  => '不能为空',
+    'validator.max'         => '不能多12字符',
+    'validator.min'         => '不能少6字符',
+    'validator.Uniqueness'  => '已经存在'
 ];

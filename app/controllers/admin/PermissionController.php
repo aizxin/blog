@@ -35,6 +35,7 @@ class PermissionController extends Controller
      */
     public function createAction()
     {
+        $this->view->permission =$this->pRepo->getMenu();
         $this->view->pick('admin/permission/create');
     }
 

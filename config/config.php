@@ -148,5 +148,5 @@ return new \Phalcon\Config([
     */
     'crypt' => [
         'key' => env('CRYPT_KEY', 'phalcon-project-cookie->key')
-    ],
+    ]
 ]);
