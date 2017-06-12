@@ -52,7 +52,7 @@ layui.use(['sow', 'lang', 'form', 'laypage'], function() {
                     this.list();
                 },
                 addHtml: function() {
-                    sow.open(lang.permission.create,sow.U("admin/permission/create"),['893px', '700px']);
+                    sow.open(lang.permission.create, sow.U("admin/permission/create"), ['893px', '700px']);
                 },
                 topList: function() {
                     this.search.pageSize = 15;
@@ -60,7 +60,42 @@ layui.use(['sow', 'lang', 'form', 'laypage'], function() {
                     this.list();
                 },
                 editHtml: function(id) {
-                    sow.open(lang.permission.edit,sow.U("admin/permission/"+id+"/edit"),['893px', '700px']);
+                    sow.open(lang.permission.edit, sow.U("admin/permission/" + id + "/edit"), ['893px', '700px']);
+                },
+                allDel: function() {
+                    var ids = [];
+                    var child = $('.layui-table').find('tbody input[type="checkbox"]');
+                    child.each(function(index, item) {
+                        if (item.checked) {
+                            ids.push(item.value)
+                        }
+                    });
+                    if (!ids.length) {
+                        sow.msgE(lang.permission.delE);
+                        return;
+                    };
+                    this.elDel(ids);
+                },
+                elDel: function(id) {
+                    var _this = this;
+                    sow.confirm(lang.sys.del, lang.sys.clear + lang.permission.index, function(index) {
+                        layer.close(index);
+                        var indexload = sow.load(1)
+                        axios.post(sow.U('admin/permission/destroy'), { id: id }).then(function(response) {
+                            if (response.data.code == 200) {
+                                layer.close(indexload);
+                                sow.msgS(response.data.message, function() {
+                                    _this.topList();
+                                });
+                            } else {
+                                layer.close(indexload);
+                                sow.msgE(response.data.message);
+                            }
+                        }).catch(function(error) {
+                            layer.closeAll();
+                            sow.msgE(lang.sys.error);
+                        });
+                    })
                 }
             }
         });

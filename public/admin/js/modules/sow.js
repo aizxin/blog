@@ -116,5 +116,17 @@ layui.define(['jquery','layer'], function(exports) {
             }
         });
     }
+    /**
+     *  [confirm description]
+     *  @author Sow
+     *  @DateTime 2017-06-12T22:00:07+0800
+     *  @param    {[type]}                 lang  [description]
+     *  @param    {[type]}                 title [description]
+     *  @param    {Function}               fn    [description]
+     *  @return   {[type]}                       [description]
+     */
+    sow.confirm = function(lang,title,fn){
+        layer.confirm(lang, {icon: 1,title: title},fn);
+    }
     exports('sow', sow);
 });

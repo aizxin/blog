@@ -64,6 +64,22 @@ class PermissionRepository extends AbstractRepository
         return $this->create($data);
     }
     /**
+     *  [destroyPermission 删除权限]
+     *  @author Sow
+     *  @DateTime 2017-06-12T22:22:30+0800
+     *  @param    [type]                   $request [description]
+     *  @return   [type]                            [description]
+     */
+    public function destroyPermission($request)
+    {
+        $id = $request->id;
+        if (is_array($id)) {
+            return ($this->getIn('id',$id))->delete();
+        } else {
+            return $this->destroy($id);
+        }
+    }
+    /**
      *  [findById getModelsManager 测试]
      *  @author Sow
      *  @DateTime 2017-06-08T21:17:00+0800

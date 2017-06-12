@@ -43,7 +43,7 @@ class PermissionController extends Controller
         $this->view->pick('admin/permission/create');
     }
     /**
-     *  [storeAction 权限添加操作]
+     *  [storeAction 权限添加/更新操作]
      *  @author Sow
      *  @DateTime 2017-06-11T20:08:28+0800
      *  @return   [type]                   [description]
@@ -73,9 +73,26 @@ class PermissionController extends Controller
      */
     public function editAction($id)
     {
-        $this->view->permissions =$this->pRepo->getMenu();
-        $this->view->permission =$this->pRepo->find($id);
+        $this->view->permissions = $this->pRepo->getMenu();
+        $this->view->permission = $this->pRepo->find($id);
         $this->view->pick('admin/permission/edit');
+    }
+    /**
+     *  [destroyAction 删除权限]
+     *  @author Sow
+     *  @DateTime 2017-06-12T22:19:27+0800
+     *  @param    string                   $value [description]
+     *  @return   [type]                          [description]
+     */
+    public function destroyAction()
+    {
+        $request = $this->request->getJsonRawBody();
+        try {
+            $user = $this->pRepo->destroyPermission($request);
+            return apiSuccess($user,$this->lang->t('handle.delete.success'));
+        } catch (\Phalcon\Exception $e) {
+            return apiError($this->lang->t('handle.delete.failed'));
+        }
     }
 
 }
