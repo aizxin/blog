@@ -49,46 +49,46 @@ layui.use(['layer', 'element', 'util','form'], function() {
         addTab(element, elem);
     });
 
-    // 监听顶部右侧导航
-    element.on('nav(side-right)', function(elem) {
-        // 修改skin
-        if ($(this).attr('data-skin')) {
-            localStorage.skin = $(this).attr('data-skin');
-            skin();
-        } else {
-            // 添加tab方法
-            addTab(element, elem);
-        }
+    // // 监听顶部右侧导航
+    // element.on('nav(side-right)', function(elem) {
+    //     // 修改skin
+    //     if ($(this).attr('data-skin')) {
+    //         localStorage.skin = $(this).attr('data-skin');
+    //         skin();
+    //     } else {
+    //         // 添加tab方法
+    //         addTab(element, elem);
+    //     }
 
-    });
+    // });
 
     // 添加TAB选项卡
-    function addTab(element, elem) {
-        var card = 'card'; // 选项卡对象
-        var title = elem.children('a').html(); // 导航栏text
-        var src = elem.children('a').attr('href-url'); // 导航栏跳转URL
-        var id = new Date().getTime(); // ID
-        var flag = getTitleId(card, title); // 是否有该选项卡存在
-        // 大于0就是有该选项卡了
-        if (flag > 0) {
-            id = flag;
-        } else {
-            if (src) {
-                //新增
-                element.tabAdd(card, {
-                    title: '<span>' + title + '</span>',
-                    content: '<iframe src="' + src + '" frameborder="0"></iframe>',
-                    id: id
-                });
-                // 关闭弹窗
-                layer.closeAll();
-            }
-        }
-        // 切换相应的ID tab
-        element.tabChange(card, id);
-        // 提示信息
-        layer.msg(title);
-    }
+    // function addTab(element, elem) {
+    //     var card = 'card'; // 选项卡对象
+    //     var title = elem.children('a').html(); // 导航栏text
+    //     var src = elem.children('a').attr('href-url'); // 导航栏跳转URL
+    //     var id = new Date().getTime(); // ID
+    //     var flag = getTitleId(card, title); // 是否有该选项卡存在
+    //     // 大于0就是有该选项卡了
+    //     if (flag > 0) {
+    //         id = flag;
+    //     } else {
+    //         if (src) {
+    //             //新增
+    //             element.tabAdd(card, {
+    //                 title: '<span>' + title + '</span>',
+    //                 content: '<iframe src="' + src + '" frameborder="0"></iframe>',
+    //                 id: id
+    //             });
+    //             // 关闭弹窗
+    //             layer.closeAll();
+    //         }
+    //     }
+    //     // 切换相应的ID tab
+    //     element.tabChange(card, id);
+    //     // 提示信息
+    //     // layer.msg(title);
+    // }
 
     // 根据导航栏text获取lay-id
     function getTitleId(card, title) {

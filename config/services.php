@@ -39,7 +39,8 @@ $di->setShared('view', function () {
             if (!is_dir($dir)) mkdir($dir, 0777, true);
             $volt->setOptions([
                 'compiledPath' => $dir,
-                'compiledSeparator' => '_'
+                'compiledSeparator' => '_',
+                'compileAlways' => true
             ]);
             return $volt;
         },
@@ -215,21 +216,22 @@ $di->set( 'cookies', function(){
 /**
  *  // dispatcher
  */
-$di->set('dispatcher', function () {
+$di->set('dispatcher', function () use($di){
     // 创建一个事件管理器
     $eventsManager = new \Phalcon\Events\Manager();
 
     // 处理异常和使用 NotFoundPlugin 未找到异常
     $eventsManager->attach(
         "dispatch:beforeException",
-        function (Event $event, $dispatcher, Exception $exception) {
+        function (Event $event, $dispatcher, \Exception $exception) use($di){
             // 代替控制器或者动作不存在时的路径
+            $di->get('logger')->info('ll'.json_encode($exception->getCode()));
             switch ($exception->getCode()) {
                 case Dispatcher::EXCEPTION_HANDLER_NOT_FOUND:
                 case Dispatcher::EXCEPTION_ACTION_NOT_FOUND:
                     $dispatcher->forward(
                         [
-                            'namespace' => 'Sow\Controllers',
+                            'namespace' => 'Sow\Controllers\Admin',
                             'controller' => 'error',
                             'action' => 'show404',
                         ]
