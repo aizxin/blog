@@ -2,11 +2,11 @@
 namespace Sow\Models;
 
 use Sow\Roles\Models\Roles as Model;
-use Sow\Traits\InitTimestamp;
+use Sow\Traits\Model as ModelTraits;
 
 class Role extends Model
 {
-    use InitTimestamp;
+    use ModelTraits;
     /**
      *
      * @var integer

@@ -1,17 +1,15 @@
 <?php
 namespace Sow\Controllers\Admin;
-use Sow\Controllers\Admin\Controller;
+use Sow\Controllers\Admin\BaseController;
 
-class IndexController extends Controller
+class IndexController extends BaseController
 {
     public function initialize(){
         parent::initialize();
     }
     public function indexAction()
     {
-        // $this->view->disable();
         $this->view->pick('admin/index/index');
-        // return $this->view->render('admin', 'index');
     }
 
 }

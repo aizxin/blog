@@ -1,8 +1,8 @@
 <?php
 namespace Sow\Controllers\Admin;
-use Sow\Controllers\Admin\Controller;
+use Sow\Controllers\Admin\BaseController;
 
-class IconController extends Controller
+class IconController extends BaseController
 {
     public function initialize(){
         parent::initialize();

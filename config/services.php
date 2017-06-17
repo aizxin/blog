@@ -1,7 +1,5 @@
 <?php
 
-use Phalcon\Events\Event;
-use Phalcon\Mvc\Dispatcher;
 /**
  * Shared configuration service
  */
@@ -73,14 +71,29 @@ $di->setShared('db', function () use ($di){
     $connection = new $class($params);
 
     if($config->database->dblisten){
-        // 打印sql日志
-        $eventsManager = new \Phalcon\Events\Manager();
+        // // 打印sql日志
         $logger = $di->get('logger');
 
-        // 监听所有数据库事件
-        $eventsManager->attach('db', function ($event, $connection) use ($logger) {
-            if ($event->getType() == 'beforeQuery') {
-                $logger->info($connection->getSQLStatement());
+        // // 监听所有数据库事件
+        $eventsManager = new \Phalcon\Events\Manager();
+        // 分析底层sql性能，并记录日志
+        $profiler = new Phalcon\Db\Profiler();
+        $eventsManager->attach('db', function ($event, $connection) use ($profiler, $logger) {
+            if($event->getType() == 'beforeQuery'){
+                //在sql发送到数据库前启动分析
+                $profiler->startProfile($connection->getSQLStatement());
+            }
+            if($event->getType() == 'afterQuery'){
+                //在sql执行完毕后停止分析
+                $profiler->stopProfile();
+                //获取分析结果
+                $profile = $profiler->getLastProfile();
+                $sql = $profile->getSQLStatement();
+                $params = $connection->getSqlVariables();
+                (is_array($params) && count($params)) && $params = json_encode($params);
+                $executeTime = $profile->getTotalElapsedSeconds();
+                //日志记录
+                $logger->info("{$sql} {$params} {$executeTime}");
             }
         });
         // 设置事件管理器
@@ -138,7 +151,6 @@ $di->setShared('session', function () {
     }
     if($session != null){
         $session->start();
-        ini_set( "session.cookie_httponly", 1 );
     }
     return $session;
 });
@@ -210,25 +222,27 @@ $di->setShared('cache', function () {
 $di->set( 'cookies', function(){
     $cookies = new \Phalcon\Http\Response\Cookies();
     $cookies->useEncryption( false );
-    ini_set("session.cookie_httponly", 1);
     return $cookies;
  });
+
 /**
  *  // dispatcher
  */
-$di->set('dispatcher', function () use($di){
-    // 创建一个事件管理器
+$di->set('dispatcher', function(){
     $eventsManager = new \Phalcon\Events\Manager();
-
-    // 处理异常和使用 NotFoundPlugin 未找到异常
-    $eventsManager->attach(
-        "dispatch:beforeException",
-        function (Event $event, $dispatcher, \Exception $exception) use($di){
-            // 代替控制器或者动作不存在时的路径
-            $di->get('logger')->info('ll'.json_encode($exception->getCode()));
+    $eventsManager->attach("dispatch:beforeException", function($event, $dispatcher, $exception) {
+        if ($event->getType() == 'beforeException') {
             switch ($exception->getCode()) {
-                case Dispatcher::EXCEPTION_HANDLER_NOT_FOUND:
-                case Dispatcher::EXCEPTION_ACTION_NOT_FOUND:
+                case \Phalcon\Dispatcher::EXCEPTION_HANDLER_NOT_FOUND:
+                    $dispatcher->forward(
+                        [
+                            'namespace' => 'Sow\Controllers\Admin',
+                            'controller' => 'error',
+                            'action' => 'show404',
+                        ]
+                    );
+                    return false;
+                case \Phalcon\Dispatcher::EXCEPTION_ACTION_NOT_FOUND:
                     $dispatcher->forward(
                         [
                             'namespace' => 'Sow\Controllers\Admin',
@@ -239,16 +253,13 @@ $di->set('dispatcher', function () use($di){
                     return false;
             }
         }
-    );
-
-    $dispatcher = new Dispatcher();
-    $dispatcher->setDefaultNamespace('Sow\Controllers');
-    // 分配事件管理器到分发器
+    });
+    $dispatcher = new \Phalcon\Mvc\Dispatcher();
     $dispatcher->setEventsManager($eventsManager);
-
+    //默认设置为前台的调度器
+    // $dispatcher->setDefaultNamespace('Sow\Controllers\Home');
     return $dispatcher;
-});
-
+}, true);
 /**
  *  日志记录
  */
@@ -266,12 +277,4 @@ $di->set('lang', function () {
     $config = $this->getConfig();
     $language = include BASE_PATH . '/resources/lang/' . $config->locale . '.php';
     return new \Phalcon\Translate\Adapter\NativeArray(['content' => $language]);
-});
-// 注册业务仓库
-$di->set('repo', function (){
-    return new \Sow\Repositories\RepositoryFactory();
-});
-// 注册验证规则
-$di->set('validate',function(){
-    return new \Sow\Validations\ValidationFactory();
 });

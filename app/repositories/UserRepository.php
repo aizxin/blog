@@ -34,7 +34,7 @@ class UserRepository extends AbstractRepository
             return false;
         }
         di('cache')->save('userPermissions',$userInfo->getPermissions()->toArray());
-        di('session')->set('userInfo',$userInfo);
+        di('session')->set('userInfo',$userInfo->toArray());
         return $userInfo;
     }
 }

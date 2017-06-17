@@ -3,14 +3,14 @@ namespace Sow\Repositories\Admin;
 
 use MicheleAngioni\PhalconRepositories\AbstractRepository;
 use Sow\Models\User;
+use Sow\Traits\Repository;
 
 class UserRepository extends AbstractRepository
 {
-    protected $model;
-
-    public function __construct()
+    use Repository;
+    final protected function __construct()
     {
-        $this->model = new User();
+        $this->model = User::modelInit();
     }
     /**
      *  [postLogin 管理员登录]
@@ -32,7 +32,7 @@ class UserRepository extends AbstractRepository
             return false;
         }
         di('cache')->save('userPermissions',$userInfo->getPermissions()->toArray());
-        di('session')->set('userInfo',$userInfo);
+        di('session')->set('userInfo',$userInfo->toArray());
         return $userInfo;
     }
 }

@@ -3,12 +3,13 @@
 namespace Sow\Models;
 
 
+use Sow\Traits\Model as ModelTraits;
 use Sow\Roles\Contracts\AuthorizationInterface;
 use Sow\Roles\Traits\HasRolesAndPermissions;
 
-class User extends Model implements AuthorizationInterface
+class User extends \Phalcon\Mvc\Model implements AuthorizationInterface
 {
-    use HasRolesAndPermissions;
+    use HasRolesAndPermissions,ModelTraits;
     /**
      *
      * @var integer

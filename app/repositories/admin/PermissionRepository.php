@@ -4,14 +4,13 @@ namespace Sow\Repositories\Admin;
 use MicheleAngioni\PhalconRepositories\AbstractRepository;
 use Sow\Models\Permission;
 use Sow\Traits\Repository;
+
 class PermissionRepository extends AbstractRepository
 {
     use Repository;
-    protected $model;
-
-    public function __construct()
+    final protected function __construct()
     {
-        $this->model = new Permission();
+        $this->model = Permission::modelInit();
     }
     /**
      *  [getPage 获取分页数据]

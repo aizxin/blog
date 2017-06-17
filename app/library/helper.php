@@ -26,31 +26,6 @@ if (!function_exists('di')) {
         return $di->get($name);
     }
 }
-/**
- *  [repository 业务仓库工厂]
- *  @author Sow
- *  @DateTime 2017-05-14T14:17:08+0800
- *  @param    [type]                   $repositoryName [description]
- *  @return   [type]                                   [description]
- */
-if (! function_exists('repository')) {
-    function repository($repositoryName){
-        return (new \Sow\Repositories\RepositoryFactory())::getModel($repositoryName);
-    }
-}
-/**
- *  [validate 验证仓库工厂]
- *  @author Sow
- *  @DateTime 2017-05-14T14:17:08+0800
- *  @param    [type]                   $validationName [description]
- *  @return   [type]                                   [description]
- */
-if (! function_exists('validate')) {
-    function validate($validationName){
-        return (new \Sow\Validations\ValidationFactory())::getValidator($validationName);
-    }
-}
-
 
 /**
 * 获取.env文件下的变量值

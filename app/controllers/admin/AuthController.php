@@ -2,18 +2,17 @@
 namespace Sow\Controllers\Admin;
 
 use Sow\Controllers\Controller;
+
 use Sow\Validations\AuthValidation;
-use Sow\Traits\Controller as ControllerTraits;
 use Sow\Repositories\Admin\UserRepository;
 
 class AuthController extends Controller
 {
-    use ControllerTraits;
     protected $uRepo;
     protected $aVa;
     public function initialize()
     {
-        $this->uRepo = new UserRepository();
+        $this->uRepo = UserRepository::repositoryInit();
         $this->aVa = new AuthValidation();
     }
     /**

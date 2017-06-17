@@ -1,5 +1,6 @@
 <?php
 namespace Sow\Traits;
+use Sow\Repositories\RepositoryFactory;
 
 trait Controller
 {
@@ -21,10 +22,6 @@ trait Controller
         $tokenKey = $this->session->get($tokenKeySessionID);
         $knownToken = $this->session->get($tokenValueSessionID);
         $equals = hash_equals($knownToken, $request->$tokenKey);
-        // if ($equals) {
-        //     // 操作成功后,删除CSRF的session
-        //     $this->security->destroyToken();
-        // }
         return $equals;
     }
     /**
@@ -55,23 +52,13 @@ trait Controller
         return $this->response->setJsonContent($result);
     }
     /**
-     *  [repository 业务仓库工厂]
-     *  @author Sow
-     *  @DateTime 2017-05-14T14:17:08+0800
-     *  @param    [type]                   $repositoryName [description]
-     *  @return   [type]                                   [description]
+     * 获取业务对象
+     * @param $repositoryName
+     * @return object
+     * @throws \Exception
      */
     public function repo($repositoryName){
-        return (new \Sow\Repositories\RepositoryFactory())::getModel($repositoryName);
-    }
-    /**
-    *  [validate 验证仓库工厂]
-    *  @author Sow
-    *  @DateTime 2017-05-14T14:17:08+0800
-    *  @param    [type]                   $validationName [description]
-    *  @return   [type]                                   [description]
-    */
-    public function validate($validationName){
-        return (new \Sow\Validations\ValidationFactory())::getValidator($validationName);
+        $repo = RepositoryFactory::repositoryInit();
+        return $repo->getRepository($repositoryName);
     }
 }

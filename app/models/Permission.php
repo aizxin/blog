@@ -3,12 +3,11 @@
 namespace Sow\Models;
 
 use Sow\Roles\Models\Permissions as Model;
-use Sow\Traits\InitTimestamp;
+use Sow\Traits\Model as ModelTraits;
 
 class Permission extends Model
 {
-
-    use InitTimestamp;
+    use ModelTraits;
     /**
      *
      * @var integer

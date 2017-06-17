@@ -10,11 +10,10 @@
 // +----------------------------------------------------------------------
 namespace Sow\Controllers\Admin;
 
-use Sow\Controllers\Admin\Controller;
+use Sow\Controllers\Admin\BaseController;
 
-class ErrorController extends Controller
+class ErrorController extends BaseController
 {
-
     public function indexAction($code = '500', $msg = '出错了')
     {
         $this->view->code = $code;

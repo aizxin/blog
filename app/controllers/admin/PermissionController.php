@@ -1,19 +1,19 @@
 <?php
 
 namespace Sow\Controllers\Admin;
-use Sow\Controllers\Admin\Controller;
+
+use Sow\Controllers\Admin\BaseController;
 use Sow\Repositories\Admin\PermissionRepository;
 use Sow\Validations\PermissionValidation;
-use Sow\Traits\Controller as ControllerTraits;
 
-class PermissionController extends Controller
+class PermissionController extends BaseController
 {
-    use ControllerTraits;
     protected $pRepo;
+    protected $pVa;
     public function initialize()
     {
         parent::initialize();
-        $this->pRepo = new PermissionRepository();
+        $this->pRepo = PermissionRepository::repositoryInit();
         $this->pVa = new PermissionValidation();
     }
 
