@@ -1,8 +1,7 @@
-# Created by .ignore support plugin (hsz.mobi)
-# @author limx
-.idea
-vendor/
+/node_modules
+/vendor
+/.idea
 composer.lock
-.phalcon
+Homestead.json
+Homestead.yaml
 .env
-node_modules
